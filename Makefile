@@ -1,12 +1,12 @@
-SRC = nxtdriver.cc nxtdriver.h
+SRC = nxtdriver.cc nxtdriver.h nxtcomms.cc nxtcomms.h
 OBJLIBS = libnxtdriver.so
-OBJS = nxtdriver.o
+OBJS = nxtdriver.o nxtcomms.o
 
 all: $(OBJLIBS)
 
 $(OBJS): $(SRC)
 	echo "Building the NXTDriver plugin..."
-	$(CXX) -Wall -fpic -g3 `pkg-config --cflags playercore` -c $(SRC)
+	$(CXX) -lusb -Wall -fpic -g3 `pkg-config --cflags playercore` -c $(SRC)
 
 $(OBJLIBS): $(OBJS)
 	$(CXX) -shared -nostartfiles -o $@ $^

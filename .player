@@ -36,3 +36,7 @@ plugins.cc:197 loading plugin libnxtdriver.so
 plugins.cc:231 invoking player_driver_init()...
 plugins.cc:247 success
 filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
