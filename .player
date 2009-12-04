@@ -1,0 +1,38 @@
+plugins.cc:197 loading plugin libexampledriver
+plugins.cc:209 error   : failed to load plugin libexampledriver, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libexampledriver
+plugins.cc:211 error   : 	/usr/local/lib/libexampledriver
+plugins.cc:211 error   : 	libexampledriver
+configfile.cc:2172 error   : failed to load plugin: libexampledriver
+server.cc:189 error   : failed to parse config file example.cfg driver blocks
+plugins.cc:197 loading plugin libExampleDriver
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+configfile.cc:2194 error   : Couldn't find driver "nxtdriver"
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+configfile.cc:2194 error   : Couldn't find driver "nxt"
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+configfile.cc:2194 error   : Couldn't find driver "nxt"
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
