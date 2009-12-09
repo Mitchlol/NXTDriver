@@ -1,0 +1,15 @@
+(''\___DONE____/'')
+1)based off example driver
+2)example driver renamed to nxt driver
+3)nxt driver split into 2 files, .cc and .h
+4)added nxt comms file
+5)added struct usbdevice and devopen function from NXT++ to nxt comms file
+6)modified  NXT::Setup() in nxt driver to use devopen and usbdevice to connect to nxt
+7)modified constructor initializer and process position 2d config in nxtdriver constructor (well documented in player stage manuel)
+
+
+
+(''\___TODO____/'')
+1)figure out what needs to be done for NXT::Shutdown() in nxt driver, and do it
+2)
+3)

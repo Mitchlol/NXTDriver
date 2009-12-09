@@ -27,7 +27,8 @@ class NXTDriver : public Driver
 
     // Main function for device thread.
     virtual void Main();
-
+	
+	player_devaddr_t position_addr; ///< Address of the position device (wheels odometry)
     int foop;
 };
 

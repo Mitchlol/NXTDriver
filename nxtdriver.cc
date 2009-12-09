@@ -30,6 +30,7 @@
 
 
 #include "nxtdriver.h"
+#include "nxtcomms.cc"
 
 
 
@@ -64,13 +65,31 @@ void NXTDriver_Register(DriverTable* table)
 // Constructor.  Retrieve options from the configuration file and do any
 // pre-Setup() setup.
 NXTDriver::NXTDriver(ConfigFile* cf, int section)
-    : Driver(cf, section, false, PLAYER_MSGQUEUE_DEFAULT_MAXLEN, 
-             PLAYER_POSITION2D_CODE)
+    : Driver(cf, section, true, PLAYER_MSGQUEUE_DEFAULT_MAXLEN)
 {
-  // Read an option from the configuration file
-  this->foop = cf->ReadInt(section, "foo", 0);
+	
+	memset(&this->position_addr, 0, sizeof(player_devaddr_t));
+	
+	// Create a position?
+	if (cf->ReadDeviceAddr(&(this->position_addr), section, "provides", PLAYER_POSITION2D_CODE, -1, NULL) == 0)
+	{
+		if (this->AddInterface(this->position_addr) != 0)
+		{
+			PLAYER_ERROR("Could not add Position2D interface for NXT");
+			this->SetError(-1);
+			return;
+		}
+		puts("added Position2D interface to NXT");
+      }
+	
+	
+	// Read an option from the configuration file
+	this->foop = cf->ReadInt(section, "foo", 0);
 
-  return;
+	// Message for checking status:
+	puts("Constructor is done!");
+
+	return;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -81,16 +100,28 @@ int NXTDriver::Setup()
 
   // Here you do whatever is necessary to setup the device, like open and
   // configure a serial port.
+	struct usb_device *DevInit();
+	DevOpen();
+	if (pUSBHandle == 0){
+		puts("pUSBHandle = 0");
+		return -1;
+	}
+	
+	if(pUSBHandle){
+		puts("got pUSBHandle");
+		printf("Was foo option given in config file? %d\n", this->foop);
+	    
+		puts("nxt driver ready");
 
-  printf("Was foo option given in config file? %d\n", this->foop);
-    
-  puts("nxt driver ready");
+		// Start the device thread; spawns a new thread and executes
+		// NXTDriver::Main(), which contains the main loop for the driver.
+		StartThread();
 
-  // Start the device thread; spawns a new thread and executes
-  // NXTDriver::Main(), which contains the main loop for the driver.
-  StartThread();
+		return(0);
+	}
+	puts("some sort of usb error");
+	return -1;
 
-  return(0);
 }
 
 
@@ -118,6 +149,28 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
   // Process messages here.  Send a response if necessary, using Publish().
   // If you handle the message successfully, return 0.  Otherwise,
   // return -1, and a NACK will be sent for you, if a response is required.
+  
+  
+	if (Message::MatchMessage(hdr, PLAYER_MSGTYPE_CMD, PLAYER_POSITION2D_CMD_VEL, this->position_addr))
+	{
+		puts("MITCH: I'm Matching Message");
+
+		// position motor command
+		player_position2d_cmd_vel_t position_cmd;
+		position_cmd = *(player_position2d_cmd_vel_t *) data;
+		PLAYER_MSG2(2,"sending motor commands %f %f", position_cmd.vel.px, position_cmd.vel.pa);
+		/*
+		if (!srv1_set_speed(this->srvdev, position_cmd.vel.px, position_cmd.vel.pa))
+		{
+			PLAYER_ERROR("failed to set speed on SRV-1");
+		}
+		*/
+		nxt_set_motor(position_cmd.vel.px);
+		return 0;
+	}
+  
+  
+  
   return(0);
 }
 

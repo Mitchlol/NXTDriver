@@ -1,6 +1,6 @@
-SRC = nxtdriver.cc nxtdriver.h nxtcomms.cc nxtcomms.h
+SRC = nxtdriver.cc nxtdriver.h blank.cpp
 OBJLIBS = libnxtdriver.so
-OBJS = nxtdriver.o nxtcomms.o
+OBJS = nxtdriver.o blank.o
 
 all: $(OBJLIBS)
 

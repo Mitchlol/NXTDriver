@@ -40,3 +40,263 @@ plugins.cc:197 loading plugin libnxtdriver.so
 plugins.cc:231 invoking player_driver_init()...
 plugins.cc:247 success
 filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file ./nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:182 error   : create_and_bind_socket() failed
+server.cc:227 error   : failed to listen on requested TCP ports
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:182 error   : create_and_bind_socket() failed
+server.cc:227 error   : failed to listen on requested TCP ports
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:182 error   : create_and_bind_socket() failed
+server.cc:227 error   : failed to listen on requested TCP ports
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:182 error   : create_and_bind_socket() failed
+server.cc:227 error   : failed to listen on requested TCP ports
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:1121 warning : subscription failed for device position2d:0
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:1121 warning : subscription failed for device position2d:0
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:1121 warning : subscription failed for device position2d:0
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
+plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:231 invoking player_driver_init()...
+plugins.cc:247 success
+playertcp.cc:291 accepted TCP client 0 on port 6665, fd 6
+playertcp.cc:1121 warning : subscription failed for device position2d:0
+playertcp.cc:855 read() read zero bytes
+playertcp.cc:467 failed to read from client 0
+playertcp.cc:390 closing TCP connection to client 0 on port 6665
+filewatcher.cc:84 error   : Select called failed in File Watcher: 4 Interrupted system call
