@@ -89,36 +89,28 @@ static bool DevOpen()
 }
 
 
-void nxt_set_motor(int speed)
+static void nxt_set_motor(int speed, int motor)
 {
-	unsigned char directCommandBuffer[256];
-	if(speed > 0){
-		directCommandBuffer[0] = 0x80;
-		directCommandBuffer[1] = 0x04;
-		directCommandBuffer[2] = 0xFF;
-		directCommandBuffer[3] = 0x42;
-		directCommandBuffer[4] = 0x01;
-		directCommandBuffer[5] = 0x00;
-		directCommandBuffer[6] = 0x00;
-		directCommandBuffer[7] = 0x20;
-		directCommandBuffer[8] = 0x00;
-		directCommandBuffer[9] = 0x00;
-		directCommandBuffer[10] = 0x00;
-		directCommandBuffer[11] = 0x00;
-	}else if (speed == 0){
-		directCommandBuffer[0] = 0x80;
-		directCommandBuffer[1] = 0x04;
-		directCommandBuffer[2] = 0xFF;
-		directCommandBuffer[3] = 0x00;
-		directCommandBuffer[4] = 0x01;
-		directCommandBuffer[5] = 0x00;
-		directCommandBuffer[6] = 0x00;
-		directCommandBuffer[7] = 0x20;
-		directCommandBuffer[8] = 0x00;
-		directCommandBuffer[9] = 0x00;
-		directCommandBuffer[10] = 0x00;
-		directCommandBuffer[11] = 0x00;
+
+	if(motor > 2){
+		return;
 	}
+	
+	char directCommandBuffer[256];
+
+		directCommandBuffer[0] = 0x80;
+		directCommandBuffer[1] = 0x04;
+		directCommandBuffer[2] = motor;
+		directCommandBuffer[3] = speed;
+		directCommandBuffer[4] = 0x01;
+		directCommandBuffer[5] = 0x00;
+		directCommandBuffer[6] = 0x00;
+		directCommandBuffer[7] = 0x20;
+		directCommandBuffer[8] = 0x00;
+		directCommandBuffer[9] = 0x00;
+		directCommandBuffer[10] = 0x00;
+		directCommandBuffer[11] = 0x00;
+
 	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 11, 0x0BB8);
 	return;
 }

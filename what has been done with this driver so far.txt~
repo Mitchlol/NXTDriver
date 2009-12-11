@@ -5,7 +5,8 @@
 4)added nxt comms file
 5)added struct usbdevice and devopen function from NXT++ to nxt comms file
 6)modified  NXT::Setup() in nxt driver to use devopen and usbdevice to connect to nxt
-7)modified constructor initializer and process position 2d config in nxtdriver constructor (well documented in player stage manuel)
+7)modified constructor initializer and process position 2d config 
+in nxtdriver constructor (well documented in player stage manuel)
 
 
 

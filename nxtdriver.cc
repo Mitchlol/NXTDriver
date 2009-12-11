@@ -85,10 +85,55 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	
 	// Read an option from the configuration file
 	this->foop = cf->ReadInt(section, "foo", 0);
-
+	//check for diofferential drive
+	const char* drive = cf->ReadString(section, "drive", "none");
+	if(strcmp(drive,"none") == 0){
+		this->diffdrive = false;
+		puts("no drive mode");
+	}else if(strcmp(drive,"differential") == 0){
+		this->diffdrive = true;
+		puts("diff drive mode");
+	}else{
+		this->diffdrive = false;
+	}
+	//read wheels
+	//rightwheel
+	const char* rwheel = cf->ReadString(section, "rightwheel", "none");
+	if(strcmp(rwheel,"none") == 0){
+		this->rightwheel = -1;
+		puts("no right wheel");
+	}else if(strcmp(rwheel,"A") == 0){
+		this->rightwheel = 0;
+		puts("right wheel connected to port A");
+	}else if(strcmp(rwheel,"B") == 0){
+		this->rightwheel = 1;
+		puts("right wheel connected to port B");
+	}else if(strcmp(rwheel,"C") == 0){
+		this->rightwheel = 2;
+		puts("right wheel connected to port C");
+	}else{
+		this->rightwheel = -1;
+	}
+	//leftwheel
+	const char* lwheel = cf->ReadString(section, "leftwheel", "none");
+	if(strcmp(lwheel,"none") == 0){
+		this->leftwheel = -1;
+		puts("no right wheel");
+	}else if(strcmp(lwheel,"A") == 0){
+		this->leftwheel = 0;
+		puts("right wheel connected to port A");
+	}else if(strcmp(lwheel,"B") == 0){
+		this->leftwheel = 1;
+		puts("right wheel connected to port B");
+	}else if(strcmp(lwheel,"C") == 0){
+		this->leftwheel = 2;
+		puts("right wheel connected to port C");
+	}else{
+		this->leftwheel = -1;
+	}
+	
 	// Message for checking status:
-	puts("Constructor is done!");
-
+	puts("done parsing config");
 	return;
 }
 
@@ -159,13 +204,71 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 		player_position2d_cmd_vel_t position_cmd;
 		position_cmd = *(player_position2d_cmd_vel_t *) data;
 		PLAYER_MSG2(2,"sending motor commands %f %f", position_cmd.vel.px, position_cmd.vel.pa);
-		/*
-		if (!srv1_set_speed(this->srvdev, position_cmd.vel.px, position_cmd.vel.pa))
-		{
-			PLAYER_ERROR("failed to set speed on SRV-1");
+
+		//nxt_set_motor(position_cmd.vel.px, 0);
+		if(this->diffdrive && this->rightwheel != -1 && this->leftwheel != -1){
+			if(abs(position_cmd.vel.px) <= 100 && abs(position_cmd.vel.pa) <= 100){
+				//int x = (int)(position_cmd.vel.px * 20 * 10);
+				//int a = (int)(position_cmd.vel.pa * 20 * 10);
+				int x = position_cmd.vel.px;
+				int a = position_cmd.vel.pa;
+				//char* temp = a;
+				//puts(a);
+				//case 1 and 2
+				//go foward or back if angle == 0
+				if(a == 0){
+					nxt_set_motor(x, rightwheel);
+					nxt_set_motor(x, leftwheel);
+				}
+				//case 3 and 4
+				//go left or right
+				else if(x == 0){
+					//if angle is > 0 go right
+					if(a > 0){
+						nxt_set_motor(-abs(a), rightwheel);
+						nxt_set_motor(abs(a), leftwheel);
+					}
+					//if angle is < 0 go left
+					if(a < 0){
+						nxt_set_motor(abs(a), rightwheel);
+						nxt_set_motor(-abs(a), leftwheel);
+					}
+				}
+				//case 5 6 7 8 go diagnol
+				//case 5 go foward right
+				else if(x > 0 && a > 0){
+					nxt_set_motor(x - (x-a), rightwheel);
+					nxt_set_motor(x - (x-(a/2)), leftwheel);
+				}
+				//case 6 go foward left
+				else if(x > 0 && a < 0){
+					nxt_set_motor(x - (x-(a/2)), rightwheel);
+					nxt_set_motor(x - (x-a), leftwheel);
+				}
+				//case 7 go back right
+				else if(x > 0 && a > 0){
+					nxt_set_motor(x + (x-(a/2)), rightwheel);
+					nxt_set_motor(x + (x-a), leftwheel);
+				}
+				//case 8 go back left
+				else if(x > 0 && a > 0){
+					nxt_set_motor(x + (x-a), rightwheel);
+					nxt_set_motor(x + (x-(a/2)), leftwheel);
+				}
+			}
 		}
-		*/
-		nxt_set_motor(position_cmd.vel.px);
+		
+		////////////////////////////
+		// Update position2d data;
+		player_position2d_data_t posdata;
+		memset(&posdata, 0, sizeof(posdata));
+
+		//this should update from a get motor state command not from the p2dsetmorotr 
+		posdata.vel.px = position_cmd.vel.px;
+		posdata.vel.pa = position_cmd.vel.pa;
+
+		this->Publish(this->position_addr, PLAYER_MSGTYPE_DATA, PLAYER_POSITION2D_DATA_STATE, (void*) &posdata, sizeof(posdata), NULL);
+		//         printf("\nCARLOS: after Publishing()\n");
 		return 0;
 	}
   

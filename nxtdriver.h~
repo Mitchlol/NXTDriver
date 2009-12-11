@@ -5,6 +5,7 @@
 
 #include <libplayercore/playercore.h>
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // The class for the driver
 class NXTDriver : public Driver
@@ -30,6 +31,9 @@ class NXTDriver : public Driver
 	
 	player_devaddr_t position_addr; ///< Address of the position device (wheels odometry)
     int foop;
+    bool diffdrive;
+    int rightwheel;
+    int leftwheel;
 };
 
 Driver* NXTDriver_Init(ConfigFile *cf, int section);

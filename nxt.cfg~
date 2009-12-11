@@ -4,7 +4,10 @@
 driver
 (
   name "NXTDriver"
-  plugin "libnxtdriver"
+  plugin "libnxtdriver.so"
   provides ["position2d:0"]
-  foo 1 
+  foo 1
+  drive "differential"
+  rightwheel "C"
+  leftwheel "B"
 )
