@@ -7,8 +7,11 @@
 6)modified  NXT::Setup() in nxt driver to use devopen and usbdevice to connect to nxt
 7)modified constructor initializer and process position 2d config 
 in nxtdriver constructor (well documented in player stage manuel)
-
-
+8)added really dumb testing drive function to nxtcomms
+9)added really dumb testing drive velocity message processing to processmessages in nxt driver
+10)wrote really dumb nxt-roam to send really  dumbe drive message to really dumb messageprocessor 
+to call really dumb drive function 
+11)NXT DRIVES!!!!!
 
 (''\___TODO____/'')
 1)figure out what needs to be done for NXT::Shutdown() in nxt driver, and do it
