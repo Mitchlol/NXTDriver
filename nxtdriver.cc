@@ -65,7 +65,7 @@ void NXTDriver_Register(DriverTable* table)
 // Constructor.  Retrieve options from the configuration file and do any
 // pre-Setup() setup.
 NXTDriver::NXTDriver(ConfigFile* cf, int section)
-    : Driver(cf, section, true, PLAYER_MSGQUEUE_DEFAULT_MAXLEN)
+    : ThreadedDriver(cf, section, true, PLAYER_MSGQUEUE_DEFAULT_MAXLEN)
 {
 	
 	memset(&this->position_addr, 0, sizeof(player_devaddr_t));
@@ -139,7 +139,7 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Set up the device.  Return 0 if things go well, and -1 otherwise.
-int NXTDriver::Setup()
+int NXTDriver::MainSetup()
 {   
   puts("NXT driver initialising");
 
@@ -172,19 +172,19 @@ int NXTDriver::Setup()
 
 ////////////////////////////////////////////////////////////////////////////////
 // Shutdown the device
-int NXTDriver::Shutdown()
+void NXTDriver::MainQuit()
 {
   puts("Shutting NXT driver down");
 
   // Stop and join the driver thread
-  StopThread();
+  //StopThread();
 
   // Here you would shut the device down by, for example, closing a
   // serial port.
 
   puts("nxt driver has been shutdown");
 
-  return(0);
+  return;
 }
 
 int NXTDriver::ProcessMessage(QueuePointer & resp_queue, 

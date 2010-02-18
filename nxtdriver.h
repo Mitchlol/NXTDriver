@@ -8,7 +8,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // The class for the driver
-class NXTDriver : public Driver
+class NXTDriver : public ThreadedDriver
 {
   public:
     
@@ -16,8 +16,8 @@ class NXTDriver : public Driver
     NXTDriver(ConfigFile* cf, int section);
 
     // Must implement the following methods.
-    virtual int Setup();
-    virtual int Shutdown();
+    //virtual int Setup();
+    //virtual int Shutdown();
 
     // This method will be invoked on each incoming message
     virtual int ProcessMessage(QueuePointer &resp_queue, 
@@ -28,6 +28,8 @@ class NXTDriver : public Driver
 
     // Main function for device thread.
     virtual void Main();
+    virtual int MainSetup();
+    virtual void MainQuit();
 	
 	player_devaddr_t position_addr; ///< Address of the position device (wheels odometry)
     int foop;

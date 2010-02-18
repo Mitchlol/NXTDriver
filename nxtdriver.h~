@@ -8,7 +8,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // The class for the driver
-class NXTDriver : public Driver
+class NXTDriver : public ThreadedDriver
 {
   public:
     
@@ -28,6 +28,8 @@ class NXTDriver : public Driver
 
     // Main function for device thread.
     virtual void Main();
+    virtual int MainSetup();
+    virtual void MainQuit();
 	
 	player_devaddr_t position_addr; ///< Address of the position device (wheels odometry)
     int foop;
