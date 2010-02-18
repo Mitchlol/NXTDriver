@@ -23,6 +23,7 @@ int main(int argc, char *argv[]){
 	// Set up proxies
 	PlayerClient    robot("localhost");
 	Position2dProxy pp(&robot,0);
+	SonarProxy      sp(&robot,0);
 	std::cout << "After Proxy Setup "<< std::endl;
 	// Allow the program to take charge of the motors (take care now)
 	pp.SetMotorEnable(true);
@@ -47,6 +48,8 @@ int main(int argc, char *argv[]){
 		std::cin >> y;
 		pp.SetSpeed(x, y);
 		
+		robot.Read();
+		std::cout << "loop end, x = " << x << " y = " << y << ", sonar = " << sp[0] << " "<< sp[1] << " "<< sp[2] << " "<< sp[3] << std::endl;
 		
 		
 		

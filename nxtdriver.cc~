@@ -48,7 +48,6 @@
 Driver* 
 NXTDriver_Init(ConfigFile* cf, int section)
 {
-puts("NXT driver initializing");
   // Create and return a new instance of this driver
   return((Driver*)(new NXTDriver(cf, section)));
 }
@@ -70,6 +69,7 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 {
 	
 	memset(&this->position_addr, 0, sizeof(player_devaddr_t));
+	memset(&this->sonar_addr, 0, sizeof(player_devaddr_t));
 	
 	// Create a position?
 	if (cf->ReadDeviceAddr(&(this->position_addr), section, "provides", PLAYER_POSITION2D_CODE, -1, NULL) == 0)
@@ -82,6 +82,18 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 		}
 		puts("added Position2D interface to NXT");
       }
+      
+	// Do we create a sonar interface?
+	if(cf->ReadDeviceAddr(&(this->sonar_addr), section, "provides", PLAYER_SONAR_CODE, -1, NULL) == 0)
+	{
+		if(this->AddInterface(this->sonar_addr) != 0)
+		{
+			PLAYER_ERROR("Could not add Sonar interface for NXT");	    	
+		 	this->SetError(-1);
+		 	return;
+	    }
+	    puts("added Sonar interface to NXT");
+	}
 	
 	
 	// Read an option from the configuration file
@@ -94,44 +106,69 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	}else if(strcmp(drive,"differential") == 0){
 		this->diffdrive = true;
 		puts("diff drive mode");
+		
+		//read wheels
+		//rightwheel
+		const char* rwheel = cf->ReadString(section, "rightwheel", "none");
+		if(strcmp(rwheel,"none") == 0){
+			this->rightwheel = -1;
+			puts("no right wheel");
+		}else if(strcmp(rwheel,"A") == 0){
+			this->rightwheel = 0;
+			puts("right wheel connected to port A");
+		}else if(strcmp(rwheel,"B") == 0){
+			this->rightwheel = 1;
+			puts("right wheel connected to port B");
+		}else if(strcmp(rwheel,"C") == 0){
+			this->rightwheel = 2;
+			puts("right wheel connected to port C");
+		}else{
+			this->rightwheel = -1;
+		}
+		//leftwheel
+		const char* lwheel = cf->ReadString(section, "leftwheel", "none");
+		if(strcmp(lwheel,"none") == 0){
+			this->leftwheel = -1;
+			puts("no right wheel");
+		}else if(strcmp(lwheel,"A") == 0){
+			this->leftwheel = 0;
+			puts("right wheel connected to port A");
+		}else if(strcmp(lwheel,"B") == 0){
+			this->leftwheel = 1;
+			puts("right wheel connected to port B");
+		}else if(strcmp(lwheel,"C") == 0){
+			this->leftwheel = 2;
+			puts("right wheel connected to port C");
+		}else{
+			this->leftwheel = -1;
+		}
+		
 	}else{
 		this->diffdrive = false;
 	}
-	//read wheels
-	//rightwheel
-	const char* rwheel = cf->ReadString(section, "rightwheel", "none");
-	if(strcmp(rwheel,"none") == 0){
-		this->rightwheel = -1;
-		puts("no right wheel");
-	}else if(strcmp(rwheel,"A") == 0){
-		this->rightwheel = 0;
-		puts("right wheel connected to port A");
-	}else if(strcmp(rwheel,"B") == 0){
-		this->rightwheel = 1;
-		puts("right wheel connected to port B");
-	}else if(strcmp(rwheel,"C") == 0){
-		this->rightwheel = 2;
-		puts("right wheel connected to port C");
-	}else{
-		this->rightwheel = -1;
+	
+	
+	
+	
+	//check for sonars drive
+	this->sonarcount = cf->ReadInt(section, "sonarcount", 0);
+	if(this->sonarcount == 0){
+		puts("no sonars");
+	}else if(this->sonarcount > 0){
+		printf("%d sonars\n", this->sonarcount);
+		this->sonars = new int[sonarcount];
+		//int portscluster = cf->ReadInt(section, "sonarcount", 0);
+		//int multiple = 0;
+		for(int i = 0; i < sonarcount; i++){
+			this->sonars[i] = cf->ReadTupleInt(section, "sonarports", i, 0);
+			printf("sonars #%d", i);
+			printf(" in port #%d\n", this->sonars[i]);
+			//decremnt sonar port# to make it 0 based
+			this->sonars[i]--;
+		}
+		
 	}
-	//leftwheel
-	const char* lwheel = cf->ReadString(section, "leftwheel", "none");
-	if(strcmp(lwheel,"none") == 0){
-		this->leftwheel = -1;
-		puts("no right wheel");
-	}else if(strcmp(lwheel,"A") == 0){
-		this->leftwheel = 0;
-		puts("right wheel connected to port A");
-	}else if(strcmp(lwheel,"B") == 0){
-		this->leftwheel = 1;
-		puts("right wheel connected to port B");
-	}else if(strcmp(lwheel,"C") == 0){
-		this->leftwheel = 2;
-		puts("right wheel connected to port C");
-	}else{
-		this->leftwheel = -1;
-	}
+	
 	
 	// Message for checking status:
 	puts("done parsing config");
@@ -156,6 +193,11 @@ int NXTDriver::MainSetup()
 	if(pUSBHandle){
 		puts("got pUSBHandle");
 		printf("Was foo option given in config file? %d\n", this->foop);
+		//tell nxt which sonars are where
+		//if sonar count is 0 this loop will have 0 iterations :D
+		for(int i = 0; i < sonarcount; i++){
+			openSonarOnPort(this->sonars[i]);
+		}
 	    
 		puts("nxt driver ready");
 
@@ -270,6 +312,7 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 
 		this->Publish(this->position_addr, PLAYER_MSGTYPE_DATA, PLAYER_POSITION2D_DATA_STATE, (void*) &posdata, sizeof(posdata), NULL);
 		//         printf("\nCARLOS: after Publishing()\n");
+		
 		return 0;
 	}
   
@@ -278,7 +321,22 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
   return(0);
 }
 
-
+void NXTDriver::UpdateSonars()
+{
+	// put sonar data
+	player_sonar_data_t sonardata;
+	memset(&sonardata, 0, sizeof(sonardata));
+	
+	float * ranges = new float[sonarcount];
+	for(int i = 0; i < sonarcount; i++){
+		ranges[i] = getSonarValue(this->sonars[i]);
+	}
+	sonardata.ranges_count = 4;
+	sonardata.ranges = ranges;
+	
+	this->Publish(this->sonar_addr, PLAYER_MSGTYPE_DATA, PLAYER_SONAR_DATA_RANGES, (void*)&sonardata, sizeof(sonardata), NULL);
+	
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Main function for device thread
@@ -293,7 +351,7 @@ void NXTDriver::Main()
     // Process incoming messages.  NXTDriver::ProcessMessage() is
     // called on each message.
     ProcessMessages();
-
+	UpdateSonars();
     // Interact with the device, and push out the resulting data, using
     // Driver::Publish()
 

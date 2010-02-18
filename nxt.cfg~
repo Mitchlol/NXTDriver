@@ -5,9 +5,13 @@ driver
 (
   name "NXTDriver"
   plugin "libnxtdriver.so"
-  provides ["position2d:0"]
+  provides ["position2d:0"
+  		"sonar:0"
+  		]
   foo 1
   drive "differential"
   rightwheel "C"
   leftwheel "B"
+  sonarcount "4"
+  sonarports "1""2""3""4"
 )

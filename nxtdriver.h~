@@ -16,8 +16,8 @@ class NXTDriver : public ThreadedDriver
     NXTDriver(ConfigFile* cf, int section);
 
     // Must implement the following methods.
-    virtual int Setup();
-    virtual int Shutdown();
+    //virtual int Setup();
+    //virtual int Shutdown();
 
     // This method will be invoked on each incoming message
     virtual int ProcessMessage(QueuePointer &resp_queue, 
@@ -32,10 +32,13 @@ class NXTDriver : public ThreadedDriver
     virtual void MainQuit();
 	
 	player_devaddr_t position_addr; ///< Address of the position device (wheels odometry)
+	player_devaddr_t sonar_addr; ///< Address of the sonar device
     int foop;
     bool diffdrive;
     int rightwheel;
     int leftwheel;
+    int sonarcount;
+    int *sonars;
 };
 
 Driver* NXTDriver_Init(ConfigFile *cf, int section);
