@@ -88,6 +88,25 @@ static bool DevOpen()
 	return 1;
 }
 
+//////////////////////
+//Generic Functions//
+////////////////////
+
+static void closeSensorOnPort(unsigned char port){
+	//std::cout << "set sonar ports" << std::endl;
+	unsigned char directCommandBuffer[256];
+	directCommandBuffer[0] = 0x80;//no return
+	directCommandBuffer[1] = 0x05;//command
+	directCommandBuffer[2] = port;//port
+	directCommandBuffer[3] = 0x00;//sensor type -- no sensor
+	directCommandBuffer[4] = 0x00;//sensor mode
+	
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 5, 0x0BB8);
+}
+
+////////////////////
+//Drive Functions//
+//////////////////
 
 static void nxt_set_motor(int speed, int motor)
 {
@@ -114,6 +133,10 @@ static void nxt_set_motor(int speed, int motor)
 	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 11, 0x0BB8);
 	return;
 }
+
+////////////////////
+//Sonar Functions//
+//////////////////
 
 static void openSonarOnPort(int port){
 	unsigned char directCommandBuffer[256];
@@ -149,7 +172,7 @@ static void setSonorContinuousReadMode(unsigned char port){
 		
 }
 
-static int getSonarValue(unsigned char port){
+static int getSonarValue(int port){
 	int bytesRead = 0;
 	do{
 		unsigned char directCommandBuffer21[256];
@@ -191,5 +214,81 @@ static int getSonarValue(unsigned char port){
 	usb_bulk_read(pUSBHandle, ucEpOut, reinterpret_cast < char *>(directReadBuffer22), 20, 0x0BB8);
 	//std::cout << "bit #" << 4 << " contents = " << std::hex << (int)directReadBuffer22[4] << std::endl;
 	return (int)directReadBuffer22[4];
+}
+
+///////////////////////////
+//Light Sensor Functions//
+/////////////////////////
+
+static void openLightActiveOnPort(unsigned char port){
+	//std::cout << "set sonar ports" << std::endl;
+	unsigned char directCommandBuffer[256];
+	directCommandBuffer[0] = 0x80;//no return
+	directCommandBuffer[1] = 0x05;//command
+	directCommandBuffer[2] = port;//port
+	directCommandBuffer[3] = 0x05;//sensor type
+	directCommandBuffer[4] = 0x80;//sensor mode
+	
+	
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 5, 0x0BB8);
+}
+
+static void openLightPassiveOnPort(unsigned char port){
+	//std::cout << "set sonar ports" << std::endl;
+	unsigned char directCommandBuffer[256];
+	directCommandBuffer[0] = 0x80;//no return
+	directCommandBuffer[1] = 0x05;//command
+	directCommandBuffer[2] = port;//port
+	directCommandBuffer[3] = 0x06;//sensor type
+	directCommandBuffer[4] = 0x80;//sensor mode
+	
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 5, 0x0BB8);
+}
+
+static int getLightValue(unsigned char port){
+	
+	unsigned char directCommandBuffer22[256];
+	directCommandBuffer22[0] = 0x00;//return
+	directCommandBuffer22[1] = 0x07;//command - lsread
+	directCommandBuffer22[2] = port;//port
+	
+	unsigned char directReadBuffer22[256];
+	
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer22), 3, 0x0BB8);
+	usb_bulk_read(pUSBHandle, ucEpOut, reinterpret_cast < char *>(directReadBuffer22), 16, 0x0BB8);
+	
+	return directReadBuffer22[12];
+}
+
+///////////////////////////
+//Sound Sensor Functions//
+/////////////////////////
+
+void openSoundOnPort(unsigned char port){
+	//std::cout << "set sonar ports" << std::endl;
+	unsigned char directCommandBuffer[256];
+	directCommandBuffer[0] = 0x80;//no return
+	directCommandBuffer[1] = 0x05;//command
+	directCommandBuffer[2] = port;//port
+	directCommandBuffer[3] = 0x05;//sensor type
+	directCommandBuffer[4] = 0x80;//sensor mode
+	
+	
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 5, 0x0BB8);
+}
+//this is exactly the same as get light value
+int getSoundValue(unsigned char port){
+	
+	unsigned char directCommandBuffer22[256];
+	directCommandBuffer22[0] = 0x00;//return
+	directCommandBuffer22[1] = 0x07;//command - lsread
+	directCommandBuffer22[2] = port;//port
+	
+	unsigned char directReadBuffer22[256];
+	
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer22), 3, 0x0BB8);
+	usb_bulk_read(pUSBHandle, ucEpOut, reinterpret_cast < char *>(directReadBuffer22), 16, 0x0BB8);
+	
+	return directReadBuffer22[12];
 }
 

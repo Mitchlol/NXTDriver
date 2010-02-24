@@ -31,15 +31,22 @@ class NXTDriver : public ThreadedDriver
     virtual int MainSetup();
     virtual void MainQuit();
     virtual void UpdateSonars();
+    virtual void UpdateLightSensors();
 	
 	player_devaddr_t position_addr; ///< Address of the position device (wheels odometry)
 	player_devaddr_t sonar_addr; ///< Address of the sonar device
+	player_devaddr_t light_addr; ///< Address of the light device
+	player_devaddr_t sound_addr; ///< Address of the sound device
     int foop;
     bool diffdrive;
     int rightwheel;
     int leftwheel;
     int sonarcount;
     int *sonars;
+    int lightsensorcount;
+    int *lightsensors;
+    int soundsensorcount;
+    int *soundsensors;
 };
 
 Driver* NXTDriver_Init(ConfigFile *cf, int section);

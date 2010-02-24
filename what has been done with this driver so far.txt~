@@ -14,6 +14,15 @@ to call really dumb drive function
 11)NXT DRIVES!!!!!
 12)tweaked drive function, nxt drives foward back left & right, but uses really bad math for diagnols.
 13)updated to player 3.0
+14)added working sonar functions to nxtcomms, not supported by nxtdriver.... yet!
+15)added sonar options to config file
+16)added sonar initiation to driver main initiation
+17)added sonar update function which is called in each iteration of the main loop, SONAR NOW WORKS!!!!
+18)added generic close sensor on port funvtion to nxt comms
+19)added light open and read runctions (active and passive)
+20)added light to config parse
+21)added update light function(light is a ranger proxy)
+22)proccesed message for set light power, this switches all the lights between active and passive
 
 (''\___TODO____/'')
 1)figure out what needs to be done for NXT::Shutdown() in nxt driver, and do it

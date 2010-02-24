@@ -24,34 +24,40 @@ int main(int argc, char *argv[]){
 	PlayerClient    robot("localhost");
 	Position2dProxy pp(&robot,0);
 	SonarProxy      sp(&robot,0);
+	RangerProxy	 rp(&robot,0);
 	std::cout << "After Proxy Setup "<< std::endl;
 	// Allow the program to take charge of the motors (take care now)
 	pp.SetMotorEnable(true);
 	
 	std::cout << "After Motor Enable "<< std::endl;
 	// Control loop
+	int x = 0;
 	while(true) {
 		//std::cout << "in while "<< std::endl;
 		double turnrate, speed, time;
-		
-		
+		/*
+		x--;
+		if (x <= 0){
+			x=100;
+		}
+		*/
 		// What are we doing?
 		//std::cout << pp << std::endl;
 		//std::cout << "Speed: 1" << std::endl;
 		//std::cout << "Turn rate: 0" << std::endl << std::endl;
 		
-		int x;
-		int y;
-		std::cout << "enter x value:";
-		std::cin >> x;
-		std::cout << "enter y value:";
-		std::cin >> y;
-		pp.SetSpeed(x, y);
+		//int x;
+		//int y;
+		//std::cout << "enter x value:";
+		//std::cin >> x;
+		//std::cout << "enter y value:";
+		//std::cin >> y;
+		pp.SetSpeed(x, 0);
 		
 		robot.Read();
-		std::cout << "loop end, x = " << x << " y = " << y << ", sonar = " << sp[0] << " "<< sp[1] << " "<< sp[2] << " "<< sp[3] << std::endl;
-		
-		
+		//std::cout << "loop end, x = " << x << " y = " << 0 << ", sonar = " << sp[0] << " "<< sp[1] << " "<< sp[2] << " "<< sp[3] << std::endl;
+		//std::cout << "loop end, x = " << x << " y = " << 0 << ", sonar = " << sp[0] << " "<< sp[1] << ", light = " << rp.GetRange(0) << " "<< rp[1] << std::endl;
+		std::cout << "loop end, x = " << x << " y = " << 0 << ", light = " << rp[0] << " "<< rp[1] << " "<< rp[2] << " "<< rp[3] << std::endl;
 		
 		
 		
@@ -60,6 +66,7 @@ int main(int argc, char *argv[]){
 		//std::cout << "After Read "<< std::endl;
 		// What does odometry tell us?
 		//std::cout << pp << std::endl;
+
     }
   
 }
