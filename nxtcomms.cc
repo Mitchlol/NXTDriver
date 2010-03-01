@@ -292,3 +292,36 @@ static int getSoundValue(unsigned char port){
 	return directReadBuffer22[12];
 }
 
+/////////////////////
+//Bumper Functions//
+///////////////////
+
+static void openBumperOnPort(int port)
+{
+	//ViUInt8 directCommandBuffer[] = { 0x05, port, 0x01, 0x20 };
+	//Comm::SendDirectCommand( false, reinterpret_cast< ViByte* >( directCommandBuffer ), sizeof( directCommandBuffer ), NULL, 0);
+	unsigned char directCommandBuffer[256];
+		directCommandBuffer[0] = 0x80;//no nreturn
+		directCommandBuffer[1] = 0x05;//set sensor command
+		directCommandBuffer[2] = port;//port
+		directCommandBuffer[3] = 0x01;//sensor type (switch)
+		directCommandBuffer[4] = 0x20;//sensor mode (boolean)
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 5, 0x0BB8);
+	return;
+}
+//same exact function as get light and sound functions
+static int getBumperValue(unsigned char port){
+	
+	unsigned char directCommandBuffer22[256];
+	directCommandBuffer22[0] = 0x00;//return
+	directCommandBuffer22[1] = 0x07;//command - lsread
+	directCommandBuffer22[2] = port;//port
+	
+	unsigned char directReadBuffer22[256];
+	
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer22), 3, 0x0BB8);
+	usb_bulk_read(pUSBHandle, ucEpOut, reinterpret_cast < char *>(directReadBuffer22), 16, 0x0BB8);
+	
+	return directReadBuffer22[12];
+}
+

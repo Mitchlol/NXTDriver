@@ -26,6 +26,7 @@ int main(int argc, char *argv[]){
 	SonarProxy      sp(&robot,0);
 	RangerProxy	 lrp(&robot,0);
 	RangerProxy	 srp(&robot,1);
+	BumperProxy	 bp(&robot,0);
 	std::cout << "After Proxy Setup "<< std::endl;
 	// Allow the program to take charge of the motors (take care now)
 	pp.SetMotorEnable(true);
@@ -57,10 +58,11 @@ int main(int argc, char *argv[]){
 		
 		robot.Read();
 		//std::cout << "loop end, x = " << x << " y = " << 0 << ", sonar = " << sp[0] << " "<< sp[1] << " "<< sp[2] << " "<< sp[3] << std::endl;
-		//std::cout << "loop end, x = " << x << " y = " << 0 << ", sonar = " << sp[0] << " "<< sp[1] << ", light = " << rp.GetRange(0) << " "<< rp[1] << std::endl;
+		//std::cout << "Bumper = " << bp[0] << " "<< bp[1] << " " << bp[2] << " "<< bp[3] << std::endl;
 		std::cout << "sonar = " << sp[0];
-		std::cout << "sound =  "<< srp[0] << ","<< srp[1];
-		std::cout << "light =  "<< lrp[0] << std::endl;
+		std::cout << " sound =  "<< srp[0];
+		std::cout << " light =  "<< lrp[0];
+		std::cout << " BUMPER =  "<< bp[0] << std::endl;
 		
 		
 		

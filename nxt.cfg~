@@ -12,15 +12,21 @@
 #3)add "sonarports ["4""2"]" if sonars are in ports 2 and 4
 # 
 #For light sensors
-#1)add ""light:::ranger:0"" to the provides section you need to increment 0 for multiple rangers
+#1)add ""light:::ranger:0"" to the provides section you need to increment 0 for multiple rangers(sound, light, etc..)
 #2)add "lightsensorcount "numlights"" where numlights is the number of lights
 #3)add "lightsensorports ["1""2"]" if sonars are in ports 1 and 2
 #
 #For sound sensors
 #1)add ""sound:::ranger:0"" to the provides section you need to increment 0 for multiple rangers(sound, light, etc..)
-#2)add "soundsensorcount "numsound"" where numsound is the number of sound
+#2)add "soundsensorcount "numsound"" where numsound is the number of sounds
 #3)add "soundsensorports ["1""2""3""4"]" if sonars are in ports 1,2,3, and 4
-
+#
+#For bumper sensors
+#1)add ""bumper:0"" to the provides section you need to increment 0 for multiple rangers(sound, light, etc..)
+#2)add "bumpercount "numbumper"" where numbumper is the number of bumpers
+#3)add "bumperports ["4""2""3""1"]" if sonars are in ports 1,2,3, and 4
+#
+#in case you didnt notice order of sensors dosnt matter player will recognise them in the order you list them here...
 
 driver
 (
@@ -30,15 +36,19 @@ driver
   		"sonar:0"
   		"light:::ranger:0"
   		"sound:::ranger:1"
+  		"bumper:0"
   		]
   foo 1
   drive "differential"
   rightwheel "C"
   leftwheel "B"
-  sonarcount "1"
-  sonarports ["4"]
+  bumpercount "1"
+  bumperports ["1"]
   lightsensorcount "1"
-  lightsensorports ["1"]
-  soundsensorcount "2"
-  soundsensorports ["2""3"]
+  lightsensorports["2"]
+#  sonarcount "1"
+#  sonarports ["3"]
+#  soundsensorcount "1"
+#  soundsensorports ["4"]
+  
 ) 

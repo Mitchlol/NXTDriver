@@ -72,6 +72,7 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	memset(&this->sonar_addr, 0, sizeof(player_devaddr_t));
 	memset(&this->light_addr, 0, sizeof(player_devaddr_t));
 	memset(&this->sound_addr, 0, sizeof(player_devaddr_t));
+	memset(&this->bumper_addr, 0, sizeof(player_devaddr_t));
 	
 	// Create a position?
 	if (cf->ReadDeviceAddr(&(this->position_addr), section, "provides", PLAYER_POSITION2D_CODE, -1, NULL) == 0)
@@ -98,7 +99,7 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	}
 	
 	
-	// Do we create a ranger interface?
+	// Do we create a light ranger interface?
 	//example "light:::ranger:0" ("ranger:0" WILL NOT WORK!)
 	if(cf->ReadDeviceAddr(&(this->light_addr), section, "provides", PLAYER_RANGER_CODE, -1, "light" ) == 0)
 	{
@@ -112,7 +113,7 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	}
 	
 	
-	// Do we create a sound interface?
+	// Do we create a sound sound interface?
 	//example "sound:::ranger:0" ("ranger:0" WILL NOT WORK!)
 	if(cf->ReadDeviceAddr(&(this->sound_addr), section, "provides", PLAYER_RANGER_CODE, -1,  "sound" ) == 0)
 	{
@@ -123,6 +124,19 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 		 	return;
 	    }
 	    puts("added Sound interface to NXT");
+	}
+	
+	//do we create a bumper interface?
+	if(cf->ReadDeviceAddr(&(this->bumper_addr), section, "provides", PLAYER_BUMPER_CODE, -1, NULL) == 0)
+	{
+
+		if(this->AddInterface(this->bumper_addr) != 0)
+		{
+			PLAYER_ERROR("Could not add Bumper interface for NXT");	
+			this->SetError(-1);
+			return;
+		}
+  		puts("added Bumper interface to NXT");
 	}
 	
 	
@@ -234,6 +248,23 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 		
 	}
 	
+	//check for bumper sensors
+	this->bumpercount = cf->ReadInt(section, "bumpercount", 0);
+	if(this->bumpercount == 0){
+		puts("no bumper");
+	}else if(this->bumpercount > 0){
+		printf("%d bumpers\n", this->bumpercount);
+		this->bumpers = new int[bumpercount];
+		for(int i = 0; i < bumpercount; i++){
+			this->bumpers[i] = cf->ReadTupleInt(section, "bumperports", i, 0);
+			printf("bumpers #%d", i);
+			printf(" in port #%d\n", this->bumpers[i]);
+			//decremnt soundsensor port# to make it 0 based
+			this->bumpers[i]--;
+		}
+		
+	}
+	
 	
 	// Message for checking status:
 	puts("done parsing config");
@@ -270,6 +301,10 @@ int NXTDriver::MainSetup()
 		//same for sound sensors
 		for(int i = 0; i < soundsensorcount; i++){
 			openSoundOnPort(this->soundsensors[i]);
+		}
+		//same for bumpers
+		for(int i = 0; i < bumpercount; i++){
+			openBumperOnPort(this->bumpers[i]);
 		}
 	    
 		puts("nxt driver ready");
@@ -468,6 +503,21 @@ void NXTDriver::UpdateSoundSensors()
 	
 }
 
+void NXTDriver::UpdateBumpers()
+{
+     player_bumper_data_t bumperdata;
+     memset(&bumperdata,0,sizeof(bumperdata));	
+	uint8_t * bumpervalues = new uint8_t[bumpercount];
+	for(int i = 0; i < bumpercount; i++){
+		bumpervalues[i] = getBumperValue(this->bumpers[i]);
+	}
+     
+     bumperdata.bumpers_count = bumpercount;
+	bumperdata.bumpers =  bumpervalues;
+
+	this->Publish(this->bumper_addr, PLAYER_MSGTYPE_DATA, PLAYER_BUMPER_DATA_STATE, (void*)&bumperdata);	
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Main function for device thread
 void NXTDriver::Main() 
@@ -486,6 +536,9 @@ void NXTDriver::Main()
 	}
 	if(lightsensorcount > 0){
 		UpdateLightSensors();
+	}
+	if(soundsensorcount > 0){
+		UpdateSoundSensors();
 	}
     // Interact with the device, and push out the resulting data, using
     // Driver::Publish()
