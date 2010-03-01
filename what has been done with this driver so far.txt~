@@ -23,6 +23,7 @@ to call really dumb drive function
 20)added light to config parse
 21)added update light function(light is a ranger proxy)
 22)proccesed message for set light power, this switches all the lights between active and passive
+23)added functions to open and read sound values
 
 (''\___TODO____/'')
 1)figure out what needs to be done for NXT::Shutdown() in nxt driver, and do it
