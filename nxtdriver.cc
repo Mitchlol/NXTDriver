@@ -96,11 +96,11 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	    }
 	    puts("added Sonar interface to NXT");
 	}
-	char lightnum1 = '0';
-	const char* lightnum2 = <const char*>(lightnum1);
-	printf("lightnum2 = %c\n", lightnum2);
+	
+	
 	// Do we create a ranger interface?
-	if(cf->ReadDeviceAddr(&(this->light_addr), section, "provides", PLAYER_RANGER_CODE, -1, lightnum2 ) == 0)
+	//example "light:::ranger:0" ("ranger:0" WILL NOT WORK!)
+	if(cf->ReadDeviceAddr(&(this->light_addr), section, "provides", PLAYER_RANGER_CODE, -1, "light" ) == 0)
 	{
 		if(this->AddInterface(this->light_addr) != 0)
 		{
@@ -110,10 +110,11 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	    }
 	    puts("added Light interface to NXT");
 	}
-	const char soundnum1 = '1';
-	const char* soundnum2 = &soundnum1;
+	
+	
 	// Do we create a sound interface?
-	if(cf->ReadDeviceAddr(&(this->sound_addr), section, "provides", PLAYER_RANGER_CODE, -1,  soundnum2) == 0)
+	//example "sound:::ranger:0" ("ranger:0" WILL NOT WORK!)
+	if(cf->ReadDeviceAddr(&(this->sound_addr), section, "provides", PLAYER_RANGER_CODE, -1,  "sound" ) == 0)
 	{
 		if(this->AddInterface(this->sound_addr) != 0)
 		{
@@ -204,6 +205,7 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 		puts("no light sensors");
 	}else if(this->lightsensorcount > 0){
 		printf("%d light sensors\n", this->lightsensorcount);
+		
 		this->lightsensors = new int[lightsensorcount];
 		for(int i = 0; i < lightsensorcount; i++){
 			this->lightsensors[i] = cf->ReadTupleInt(section, "lightsensorports", i, 0);
@@ -215,7 +217,6 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 		
 	}
 	
-	//not used yet
 	//check for sound sensors
 	this->soundsensorcount = cf->ReadInt(section, "soundsensorcount", 0);
 	if(this->soundsensorcount == 0){
@@ -265,6 +266,10 @@ int NXTDriver::MainSetup()
 		//same for light sensors
 		for(int i = 0; i < lightsensorcount; i++){
 			openLightActiveOnPort(this->lightsensors[i]);
+		}
+		//same for sound sensors
+		for(int i = 0; i < soundsensorcount; i++){
+			openSoundOnPort(this->soundsensors[i]);
 		}
 	    
 		puts("nxt driver ready");
@@ -388,6 +393,7 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 	// Power config request
 	if (Message::MatchMessage (hdr, PLAYER_MSGTYPE_REQ, PLAYER_RANGER_REQ_POWER, device_addr))
 	{
+		//maybe should check id device_addr is equal to lightaddr, dont wanna make light passive on request to turn off sound sensnors
 		int state = reinterpret_cast<player_ranger_power_config_t*> (data)->state;
 		//printf("Power State Request = %d\n", reinterpret_cast<player_ranger_power_config_t*> (data)->state);
 		if(state == 1){
@@ -445,6 +451,23 @@ void NXTDriver::UpdateLightSensors()
 	
 }
 
+void NXTDriver::UpdateSoundSensors()
+{
+	// put light data
+	player_ranger_data_range_t sounddata;
+	memset(&sounddata, 0, sizeof(sounddata));
+	
+	double * ranges = new double[soundsensorcount];
+	for(int i = 0; i < soundsensorcount; i++){
+		ranges[i] = getSoundValue(this->soundsensors[i]);
+	}
+	sounddata.ranges_count = soundsensorcount;
+	sounddata.ranges = ranges;
+	
+	this->Publish(this->sound_addr, PLAYER_MSGTYPE_DATA, PLAYER_RANGER_DATA_RANGE, reinterpret_cast<void*>(&sounddata), sizeof(sounddata), NULL);
+	
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Main function for device thread
 void NXTDriver::Main() 
@@ -463,6 +486,9 @@ void NXTDriver::Main()
 	}
 	if(lightsensorcount > 0){
 		UpdateLightSensors();
+	}
+	if(soundsensorcount > 0){
+		UpdateSoundSensors();
 	}
     // Interact with the device, and push out the resulting data, using
     // Driver::Publish()

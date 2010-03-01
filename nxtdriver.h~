@@ -32,6 +32,7 @@ class NXTDriver : public ThreadedDriver
     virtual void MainQuit();
     virtual void UpdateSonars();
     virtual void UpdateLightSensors();
+    virtual void UpdateSoundSensors();
 	
 	player_devaddr_t position_addr; ///< Address of the position device (wheels odometry)
 	player_devaddr_t sonar_addr; ///< Address of the sonar device
