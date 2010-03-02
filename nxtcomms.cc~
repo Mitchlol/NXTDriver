@@ -129,8 +129,36 @@ static void nxt_set_motor(int speed, int motor)
 		directCommandBuffer[9] = 0x00;//tach state - run forever
 		directCommandBuffer[10] = 0x00;//tach state - run forever
 		directCommandBuffer[11] = 0x00;//tach state - run forever
+		directCommandBuffer[12] = 0x00;//tach state - run forever
 
-	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 11, 0x0BB8);
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 13, 0x0BB8);
+	return;
+}
+
+static void nxt_set_motor_limit(int speed, int limit, int motor)
+{
+
+	if(motor > 2){
+		return;
+	}
+	
+	char directCommandBuffer[256];
+
+		directCommandBuffer[0] = 0x80;// no return
+		directCommandBuffer[1] = 0x04;//set ouput state command
+		directCommandBuffer[2] = motor;//port
+		directCommandBuffer[3] = speed;//power
+		directCommandBuffer[4] = 0x01;//mode - motor on
+		directCommandBuffer[5] = 0x00;//regulation mode - none
+		directCommandBuffer[6] = 0x00;//turn ratio
+		directCommandBuffer[7] = 0x20;//run state - running
+		directCommandBuffer[8] = limit;//tach state - run forever
+		directCommandBuffer[9] = 0x00;//tach state - run forever
+		directCommandBuffer[10] = 0x00;//tach state - run forever
+		directCommandBuffer[11] = 0x00;//tach state - run forever
+		directCommandBuffer[12] = 0x00;//tach state - run forever
+
+	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 13, 0x0BB8);
 	return;
 }
 
@@ -309,7 +337,7 @@ static void openBumperOnPort(int port)
 	usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer), 5, 0x0BB8);
 	return;
 }
-
+//same exact function as get light and sound functions
 static int getBumperValue(unsigned char port){
 	
 	unsigned char directCommandBuffer22[256];

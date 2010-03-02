@@ -73,6 +73,7 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	memset(&this->light_addr, 0, sizeof(player_devaddr_t));
 	memset(&this->sound_addr, 0, sizeof(player_devaddr_t));
 	memset(&this->bumper_addr, 0, sizeof(player_devaddr_t));
+	memset(&this->gripper_addr, 0, sizeof(player_devaddr_t));
 	
 	// Create a position?
 	if (cf->ReadDeviceAddr(&(this->position_addr), section, "provides", PLAYER_POSITION2D_CODE, -1, NULL) == 0)
@@ -137,6 +138,18 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 			return;
 		}
   		puts("added Bumper interface to NXT");
+	}
+	
+	// Do we create a gripper interface?
+	if(cf->ReadDeviceAddr(&(this->gripper_addr), section, "provides", PLAYER_GRIPPER_CODE, -1, NULL) == 0)
+	{
+		if(this->AddInterface(this->gripper_addr) != 0)
+		{
+			PLAYER_ERROR("Could not add Gripper interface for NXT");
+			this->SetError(-1);
+			return;
+		}
+		puts("added Gripper interface to NXT");
 	}
 	
 	
@@ -263,6 +276,31 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 			this->bumpers[i]--;
 		}
 		
+	}
+	
+	//check for gripper values
+	const char* gripperportchar = cf->ReadString(section, "gripperport", "none");
+		if(strcmp(gripperportchar,"none") == 0){
+			this->gripperport = -1;
+			puts("no gripper");
+		}else if(strcmp(gripperportchar,"A") == 0){
+			this->gripperport = 0;
+			puts("gripper connected to port A");
+		}else if(strcmp(gripperportchar,"B") == 0){
+			this->gripperport = 1;
+			puts("gripper connected to port B");
+		}else if(strcmp(gripperportchar,"C") == 0){
+			this->gripperport = 2;
+			puts("gripper connected to port C");
+		}else{
+			this->gripperport = -1;
+		}
+	this->gripperangle = cf->ReadInt(section, "gripperangle", 0);
+	if(this->gripperangle == 0){
+		puts("no gripper angle, no gripper....");
+		this->gripperport = -1;
+	}else if(this->gripperangle > 0){
+		printf("Gripper Angle = %d\n", this->gripperangle);
 	}
 	
 	
@@ -446,7 +484,37 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 		this->Publish(this->light_addr, PLAYER_MSGTYPE_RESP_ACK, PLAYER_RANGER_REQ_POWER, NULL, 0, NULL);
 		return 0;
 	}
-  
+	
+	//Match messages for gripper interface!
+	if (Message::MatchMessage (hdr, PLAYER_MSGTYPE_CMD, PLAYER_GRIPPER_CMD_OPEN, this->gripper_addr))
+	{
+		if(gripperangle > 0){
+			nxt_set_motor(100, gripperport);
+			nxt_set_motor_with_limit(100, gripperangle, gripperport);
+		}else{
+			nxt_set_motor(-100, gripperport);
+			nxt_set_motor_with_limit(-100, -gripperangle, gripperport);
+		}
+		player_gripper_data_t data2 = reinterpret_cast<player_gripper_data_t>(data);
+		// put gripper data
+  		this->Publish(this->gripper_addr, PLAYER_MSGTYPE_DATA, PLAYER_GRIPPER_DATA_STATE, (void*)&(data2), sizeof(player_gripper_data_t), NULL);
+		return 0;
+	}
+	if (Message::MatchMessage (hdr, PLAYER_MSGTYPE_CMD, PLAYER_GRIPPER_CMD_CLOSE, this->gripper_addr))
+	{
+		if(gripperangle > 0){
+			nxt_set_motor(-100, gripperport);
+			nxt_set_motor_with_limit(-100, gripperangle, gripperport);
+		}else{
+			nxt_set_motor(100, gripperport);
+			nxt_set_motor_with_limit(100, -gripperangle, gripperport);
+		}
+		player_gripper_data_t data2 = reinterpret_cast<player_gripper_data_t>(data);
+		// put gripper data
+  		this->Publish(this->gripper_addr, PLAYER_MSGTYPE_DATA, PLAYER_GRIPPER_DATA_STATE, (void*)&(data2), sizeof(player_gripper_data_t), NULL);
+		
+		return 0;
+	}
   
   
   return(0);
@@ -539,6 +607,9 @@ void NXTDriver::Main()
 	}
 	if(soundsensorcount > 0){
 		UpdateSoundSensors();
+	}
+	if(bumpercount > 0){
+		UpdateBumpers();
 	}
     // Interact with the device, and push out the resulting data, using
     // Driver::Publish()

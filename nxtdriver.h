@@ -40,6 +40,8 @@ class NXTDriver : public ThreadedDriver
 	player_devaddr_t light_addr; ///< Address of the light device
 	player_devaddr_t sound_addr; ///< Address of the sound device
 	player_devaddr_t bumper_addr; ///< Address of the bumper device
+	player_devaddr_t gripper_addr; ///< Address of the bumper device
+	
     int foop;
     bool diffdrive;
     int rightwheel;
@@ -52,6 +54,8 @@ class NXTDriver : public ThreadedDriver
     int *soundsensors;
     int bumpercount;
     int *bumpers;
+    int gripperport;
+    int gripperangle;
 };
 
 Driver* NXTDriver_Init(ConfigFile *cf, int section);

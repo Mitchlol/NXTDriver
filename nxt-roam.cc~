@@ -27,6 +27,7 @@ int main(int argc, char *argv[]){
 	RangerProxy	 lrp(&robot,0);
 	RangerProxy	 srp(&robot,1);
 	BumperProxy	 bp(&robot,0);
+	GripperProxy	 gp(&robot,0);
 	std::cout << "After Proxy Setup "<< std::endl;
 	// Allow the program to take charge of the motors (take care now)
 	pp.SetMotorEnable(true);
@@ -54,15 +55,22 @@ int main(int argc, char *argv[]){
 		//std::cin >> x;
 		//std::cout << "enter y value:";
 		//std::cin >> y;
-		pp.SetSpeed(x, 0);
+		//pp.SetSpeed(x, 0);
 		
 		robot.Read();
 		//std::cout << "loop end, x = " << x << " y = " << 0 << ", sonar = " << sp[0] << " "<< sp[1] << " "<< sp[2] << " "<< sp[3] << std::endl;
 		//std::cout << "Bumper = " << bp[0] << " "<< bp[1] << " " << bp[2] << " "<< bp[3] << std::endl;
-		std::cout << "sonar = " << sp[0];
-		std::cout << " sound =  "<< srp[0];
-		std::cout << " light =  "<< lrp[0];
-		std::cout << " BUMPER =  "<< Bp[0] << std::endl;
+		//std::cout << "sonar = " << sp[0];
+		//std::cout << " sound =  "<< srp[0];
+		//std::cout << " light =  "<< lrp[0];
+		std::cout << " BUMPER =  "<< bp[0] << std::endl;
+		
+		if(bp[0] == 1){
+			gp.Open();
+		}
+		if(bp[1] == 1){
+			gp.Close();
+		}
 		
 		
 		
