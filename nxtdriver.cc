@@ -491,12 +491,14 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 		if(gripperangle > 0){
 			nxt_set_motor(100, gripperport);
 			nxt_set_motor_with_limit(100, gripperangle, gripperport);
+			
 		}else{
 			nxt_set_motor(-100, gripperport);
 			nxt_set_motor_with_limit(-100, -gripperangle, gripperport);
 		}
-		player_gripper_data_t data2;
 		// put gripper data
+		player_gripper_data_t data2;
+		data2.state = PLAYER_GRIPPER_STATE_OPEN;
   		this->Publish(this->gripper_addr, PLAYER_MSGTYPE_DATA, PLAYER_GRIPPER_DATA_STATE, (void*)&(data2), sizeof(player_gripper_data_t), NULL);
 		return 0;
 	}
@@ -505,12 +507,14 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 		if(gripperangle > 0){
 			nxt_set_motor(-100, gripperport);
 			nxt_set_motor_with_limit(-100, gripperangle, gripperport);
+			
 		}else{
 			nxt_set_motor(100, gripperport);
 			nxt_set_motor_with_limit(100, -gripperangle, gripperport);
 		}
-		player_gripper_data_t data2;
 		// put gripper data
+		player_gripper_data_t data2;
+		data2.state = PLAYER_GRIPPER_STATE_CLOSED;
   		this->Publish(this->gripper_addr, PLAYER_MSGTYPE_DATA, PLAYER_GRIPPER_DATA_STATE, (void*)&(data2), sizeof(player_gripper_data_t), NULL);
 		
 		return 0;

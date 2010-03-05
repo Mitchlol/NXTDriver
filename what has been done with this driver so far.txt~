@@ -26,6 +26,7 @@ to call really dumb drive function
 23)added functions to open and read sound values
 24)updated config parsing to recognise both sound and light rangers added usage info to nxt.cfg
 25)added update sound function now driver supports sound
+26)added bumper, just pretend i wrote this as 3 steps like the previous sensors
 
 (''\___TODO____/'')
 1)figure out what needs to be done for NXT::Shutdown() in nxt driver, and do it

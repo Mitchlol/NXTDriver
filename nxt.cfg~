@@ -43,8 +43,8 @@ driver
 #  drive "differential"
 #  rightwheel "C"
 #  leftwheel "B"
-  bumpercount "1"
-  bumperports ["1"]
+  bumpercount "2"
+  bumperports ["1""2"]
 #  lightsensorcount "1"
 #  lightsensorports ["2"]
 #  sonarcount "1"
@@ -52,6 +52,6 @@ driver
 #  soundsensorcount "1"
 #  soundsensorports ["4"]
   gripperport "A"
-  gripperangle "-45"
+  gripperangle "45"
   
 ) 
