@@ -387,7 +387,7 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
   
 	if (Message::MatchMessage(hdr, PLAYER_MSGTYPE_CMD, PLAYER_POSITION2D_CMD_VEL, this->position_addr))
 	{
-		puts("MITCH: I'm Matching Message");
+		puts("MITCH: I'm Matching Position2d Message");
 
 		// position motor command
 		player_position2d_cmd_vel_t position_cmd;
@@ -464,8 +464,9 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 	
 	// Messages from the ranger interface
 	// Power config request
-	if (Message::MatchMessage (hdr, PLAYER_MSGTYPE_REQ, PLAYER_RANGER_REQ_POWER, device_addr))
+	if (Message::MatchMessage (hdr, PLAYER_MSGTYPE_REQ, PLAYER_RANGER_REQ_POWER, this->light_addr))
 	{
+		puts("MITCH: I'm Matching Light Set Power Message");
 		//maybe should check id device_addr is equal to lightaddr, dont wanna make light passive on request to turn off sound sensnors
 		int state = reinterpret_cast<player_ranger_power_config_t*> (data)->state;
 		//printf("Power State Request = %d\n", reinterpret_cast<player_ranger_power_config_t*> (data)->state);
@@ -488,6 +489,7 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 	//Match messages for gripper interface!
 	if (Message::MatchMessage (hdr, PLAYER_MSGTYPE_CMD, PLAYER_GRIPPER_CMD_OPEN, this->gripper_addr))
 	{
+		puts("MITCH: I'm Matching Gripper Open Message");
 		if(gripperangle > 0){
 			nxt_set_motor(100, gripperport);
 			nxt_set_motor_with_limit(100, gripperangle, gripperport);
@@ -504,6 +506,7 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 	}
 	if (Message::MatchMessage (hdr, PLAYER_MSGTYPE_CMD, PLAYER_GRIPPER_CMD_CLOSE, this->gripper_addr))
 	{
+		puts("MITCH: I'm Matching Gripper Close Message");
 		if(gripperangle > 0){
 			nxt_set_motor(-100, gripperport);
 			nxt_set_motor_with_limit(-100, gripperangle, gripperport);

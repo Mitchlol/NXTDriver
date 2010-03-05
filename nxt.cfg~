@@ -27,6 +27,11 @@
 #3)add "bumperports ["4""2""3""1"]" if sonars are in ports 1,2,3, and 4
 #
 #in case you didnt notice order of sensors dosnt matter player will recognise them in the order you list them here...
+#
+#For Gripper
+#1)add "gripperport "portletter"" where portletter is A,B, or C 
+#2)add "gripperangle "integer"" where integer represents how many degrees the motor needs to turn to open or close the gripper
+#if open and close are reversed, use a negative angle or recunstruct gripper. (open and close can reverse based on how you build your gripper!)
 
 driver
 (
@@ -35,7 +40,7 @@ driver
   provides ["position2d:0"
   		"sonar:0"
   		"light:::ranger:0"
-  		"sound:::ranger:1"
+  		
   		"bumper:0"
   		"gripper:0"
   		]
@@ -45,10 +50,10 @@ driver
 #  leftwheel "B"
   bumpercount "2"
   bumperports ["1""2"]
-#  lightsensorcount "1"
-#  lightsensorports ["2"]
-#  sonarcount "1"
-#  sonarports ["3"]
+  lightsensorcount "1"
+  lightsensorports ["4"]
+  sonarcount "1"
+  sonarports ["3"]
 #  soundsensorcount "1"
 #  soundsensorports ["4"]
   gripperport "A"

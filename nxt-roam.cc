@@ -38,6 +38,7 @@ int main(int argc, char *argv[]){
 	while(true) {
 		//std::cout << "in while "<< std::endl;
 		double turnrate, speed, time;
+		
 		/*
 		x--;
 		if (x <= 0){
@@ -63,15 +64,16 @@ int main(int argc, char *argv[]){
 		//std::cout << "sonar = " << sp[0];
 		//std::cout << " sound =  "<< srp[0];
 		//std::cout << " light =  "<< lrp[0];
-		std::cout << " BUMPER =  "<< bp[0] << " " << bp[1] << gp << std::endl;
+		std::cout << " BUMPER =  "<< bp[0] << " " << bp[1] << " SONAR = " << sp[0] << " LIGHT = " << lrp[0] << std::endl;
 		
 		if(bp[0] == 1){
 			gp.Open();
+			lrp.SetPower(false);
 		}
 		if(bp[1] == 1){
 			gp.Close();
+			lrp.SetPower(true);
 		}
-		
 		
 		
 		// Read from the proxies
