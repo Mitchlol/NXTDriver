@@ -60,19 +60,32 @@ int main(int argc, char *argv[]){
 		
 		robot.Read();
 		//std::cout << "loop end, x = " << x << " y = " << 0 << ", sonar = " << sp[0] << " "<< sp[1] << " "<< sp[2] << " "<< sp[3] << std::endl;
-		//std::cout << "Bumper = " << bp[0] << " "<< bp[1] << " " << bp[2] << " "<< bp[3] << std::endl;
-		//std::cout << "sonar = " << sp[0];
-		//std::cout << " sound =  "<< srp[0];
-		//std::cout << " light =  "<< lrp[0];
-		std::cout << " BUMPER =  "<< bp[0] << " " << bp[1] << " SONAR = " << sp[0] << " LIGHT = " << lrp[0] << std::endl;
+		
+		std::cout << "sonar = " << sp[0];
+		std::cout << " sound =  "<< srp[0];
+		std::cout << " light =  "<< lrp[0];
+		std::cout << "Bumper = " << bp[0] << std::endl;
+		std::cout << " light =  "<< lrp[0] << " " << lrp[1] << std::endl;
+		/*
+		if(lrp[0] - lrp[1] >=7){
+			pp.SetSpeed(-100, 0);
+		}else if(lrp[1] - lrp[0] >=7){
+			pp.SetSpeed(100, 0);
+		}else{
+			pp.SetSpeed(0, 0);
+		}
+		*/
 		
 		if(bp[0] == 1){
 			gp.Open();
-			lrp.SetPower(false);
 		}
-		if(bp[1] == 1){
+		if(sp[0] <= 10){
 			gp.Close();
-			lrp.SetPower(true);
+		}
+		if(srp[0] >= 90){
+			pp.SetSpeed(100, 0);
+		}else{
+			pp.SetSpeed(0, 0);
 		}
 		
 		

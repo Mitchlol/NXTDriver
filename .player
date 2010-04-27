@@ -3309,4 +3309,10 @@ nxtdriver.cc:206 sending motor commands 134521920.000000 -1208877328.000000
 nxtdriver.cc:206 sending motor commands 134521920.000000 -1208877328.000000
 nxtdriver.cc:206 sending motor commands 134521920.000000 -1208877328.000000
 nxtdriver.cc:206 sending motor commands 134521920.000000 -1208877328.000000
-nxtdriver.cc:206 sending motor commands 134521920.0000
+nxtdriver.cc:206 sending motor commands 134521920.0000plugins.cc:197 loading plugin libnxtdriver.so
+plugins.cc:209 error   : failed to load plugin libnxtdriver.so, tried paths:
+plugins.cc:211 error   : 	/home/mitch/Desktop/Mitch_files/NXT Player Plugin Driver/./libnxtdriver.so
+plugins.cc:211 error   : 	/usr/local/lib/libnxtdriver.so
+plugins.cc:211 error   : 	libnxtdriver.so
+configfile.cc:2172 error   : failed to load plugin: libnxtdriver.so
+server.cc:189 error   : failed to parse config file nxt.cfg driver blocks

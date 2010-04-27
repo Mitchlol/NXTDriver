@@ -40,23 +40,23 @@ driver
   provides ["position2d:0"
   		"sonar:0"
   		"light:::ranger:0"
-  		
+  		"sound:::ranger:1"
   		"bumper:0"
   		"gripper:0"
   		]
   foo 1
-#  drive "differential"
-#  rightwheel "C"
-#  leftwheel "B"
-  bumpercount "2"
-  bumperports ["1""2"]
+  drive "differential"
+  rightwheel "A"
+  leftwheel "B"
+  bumpercount "1"
+  bumperports ["1"]
   lightsensorcount "1"
-  lightsensorports ["4"]
+  lightsensorports ["2"]
   sonarcount "1"
   sonarports ["3"]
-#  soundsensorcount "1"
-#  soundsensorports ["4"]
-  gripperport "A"
-  gripperangle "45"
+  soundsensorcount "1"
+  soundsensorports ["4"]
+#  gripperport "A"
+#  gripperangle "45"
   
 ) 

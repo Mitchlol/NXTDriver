@@ -3,6 +3,10 @@
 
 #include <unistd.h>
 
+#include "Connection.cc"
+#include "USBConnection.cc"
+//#include "BTConnection.cc"
+
 #include <libplayercore/playercore.h>
 
 
@@ -56,6 +60,8 @@ class NXTDriver : public ThreadedDriver
     int *bumpers;
     int gripperport;
     int gripperangle;
+
+    Connection *myConnection;
 };
 
 Driver* NXTDriver_Init(ConfigFile *cf, int section);

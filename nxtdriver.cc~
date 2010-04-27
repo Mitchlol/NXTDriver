@@ -30,7 +30,7 @@
 
 
 #include "nxtdriver.h"
-#include "nxtcomms.cc"
+//#include "nxtcomms.cc"
 
 
 
@@ -317,32 +317,40 @@ int NXTDriver::MainSetup()
 
   // Here you do whatever is necessary to setup the device, like open and
   // configure a serial port.
+	/*	
 	struct usb_device *DevInit();
 	DevOpen();
 	if (pUSBHandle == 0){
 		puts("pUSBHandle = 0");
 		return -1;
 	}
-	
-	if(pUSBHandle){
-		puts("got pUSBHandle");
+	*/
+/*
+	USBConnection *myUSBConnection = new USBConnection;
+	myConnection = dynamic_cast<Connection*>(myUSBConnection);
+*/
+	BTConnection *myBTConnection = new BTConnection("00:16:53:02:D5:C8");
+	this->myConnection = dynamic_cast<Connection*>(myBTConnection);
+
+	if(myConnection->nxt_connect() == true){
+		puts("Connected");
 		printf("Was foo option given in config file? %d\n", this->foop);
 		//tell nxt which sonars are where
 		//if sonar count is 0 this loop will have 0 iterations :D
 		for(int i = 0; i < sonarcount; i++){
-			openSonarOnPort(this->sonars[i]);
+			myConnection->openSonarOnPort(this->sonars[i]);
 		}
 		//same for light sensors
 		for(int i = 0; i < lightsensorcount; i++){
-			openLightActiveOnPort(this->lightsensors[i]);
+			myConnection->openLightActiveOnPort(this->lightsensors[i]);
 		}
 		//same for sound sensors
 		for(int i = 0; i < soundsensorcount; i++){
-			openSoundOnPort(this->soundsensors[i]);
+			myConnection->openSoundOnPort(this->soundsensors[i]);
 		}
 		//same for bumpers
 		for(int i = 0; i < bumpercount; i++){
-			openBumperOnPort(this->bumpers[i]);
+			myConnection->openBumperOnPort(this->bumpers[i]);
 		}
 	    
 		puts("nxt driver ready");
@@ -406,43 +414,45 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 				//case 1 and 2
 				//go foward or back if angle == 0
 				if(a == 0){
-					nxt_set_motor(x, rightwheel);
-					nxt_set_motor(x, leftwheel);
+					
+					myConnection->nxt_set_motor(x, rightwheel);
+					myConnection->nxt_set_motor(x, leftwheel);
+					
 				}
 				//case 3 and 4
 				//go left or right
 				else if(x == 0){
 					//if angle is > 0 go right
 					if(a > 0){
-						nxt_set_motor(-abs(a), rightwheel);
-						nxt_set_motor(abs(a), leftwheel);
+						myConnection->nxt_set_motor(-abs(a), rightwheel);
+						myConnection->nxt_set_motor(abs(a), leftwheel);
 					}
 					//if angle is < 0 go left
 					if(a < 0){
-						nxt_set_motor(abs(a), rightwheel);
-						nxt_set_motor(-abs(a), leftwheel);
+						myConnection->nxt_set_motor(abs(a), rightwheel);
+						myConnection->nxt_set_motor(-abs(a), leftwheel);
 					}
 				}
 				//case 5 6 7 8 go diagnol
 				//case 5 go foward right
 				else if(x > 0 && a > 0){
-					nxt_set_motor(x - (x-a), rightwheel);
-					nxt_set_motor(x - (x-(a/2)), leftwheel);
+					myConnection->nxt_set_motor(x - (x-a), rightwheel);
+					myConnection->nxt_set_motor(x - (x-(a/2)), leftwheel);
 				}
 				//case 6 go foward left
 				else if(x > 0 && a < 0){
-					nxt_set_motor(x - (x-(a/2)), rightwheel);
-					nxt_set_motor(x - (x-a), leftwheel);
+					myConnection->nxt_set_motor(x - (x-(a/2)), rightwheel);
+					myConnection->nxt_set_motor(x - (x-a), leftwheel);
 				}
 				//case 7 go back right
-				else if(x > 0 && a > 0){
-					nxt_set_motor(x + (x-(a/2)), rightwheel);
-					nxt_set_motor(x + (x-a), leftwheel);
+				else if(x < 0 && a > 0){
+					myConnection->nxt_set_motor(x + (x-(a/2)), rightwheel);
+					myConnection->nxt_set_motor(x + (x-a), leftwheel);
 				}
 				//case 8 go back left
-				else if(x > 0 && a > 0){
-					nxt_set_motor(x + (x-a), rightwheel);
-					nxt_set_motor(x + (x-(a/2)), leftwheel);
+				else if(x < 0 && a < 0){
+					myConnection->nxt_set_motor(x + (x-a), rightwheel);
+					myConnection->nxt_set_motor(x + (x-(a/2)), leftwheel);
 				}
 			}
 		}
@@ -464,7 +474,7 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 	
 	// Messages from the ranger interface
 	// Power config request
-	if (Message::MatchMessage (hdr, PLAYER_MSGTYPE_REQ, PLAYER_RANGER_REQ_POWER, device_addr))
+	if (Message::MatchMessage (hdr, PLAYER_MSGTYPE_REQ, PLAYER_RANGER_REQ_POWER, this->light_addr))
 	{
 		puts("MITCH: I'm Matching Light Set Power Message");
 		//maybe should check id device_addr is equal to lightaddr, dont wanna make light passive on request to turn off sound sensnors
@@ -472,11 +482,11 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 		//printf("Power State Request = %d\n", reinterpret_cast<player_ranger_power_config_t*> (data)->state);
 		if(state == 1){
 			for(int i = 0; i < lightsensorcount; i++){
-				openLightActiveOnPort(this->lightsensors[i]);
+				myConnection->openLightActiveOnPort(this->lightsensors[i]);
 			}
 		}else if(state == 0){
 			for(int i = 0; i < lightsensorcount; i++){
-				openLightPassiveOnPort(this->lightsensors[i]);
+				myConnection->openLightPassiveOnPort(this->lightsensors[i]);
 			}
 		}
 		//not sure if im publishing the right message, but it works so????
@@ -491,12 +501,12 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 	{
 		puts("MITCH: I'm Matching Gripper Open Message");
 		if(gripperangle > 0){
-			nxt_set_motor(100, gripperport);
-			nxt_set_motor_with_limit(100, gripperangle, gripperport);
+			myConnection->nxt_set_motor(100, gripperport);
+			myConnection->nxt_set_motor_with_limit(100, gripperangle, gripperport);
 			
 		}else{
-			nxt_set_motor(-100, gripperport);
-			nxt_set_motor_with_limit(-100, -gripperangle, gripperport);
+			myConnection->nxt_set_motor(-100, gripperport);
+			myConnection->nxt_set_motor_with_limit(-100, -gripperangle, gripperport);
 		}
 		// put gripper data
 		player_gripper_data_t data2;
@@ -508,12 +518,12 @@ int NXTDriver::ProcessMessage(QueuePointer & resp_queue,
 	{
 		puts("MITCH: I'm Matching Gripper Close Message");
 		if(gripperangle > 0){
-			nxt_set_motor(-100, gripperport);
-			nxt_set_motor_with_limit(-100, gripperangle, gripperport);
+			myConnection->nxt_set_motor(-100, gripperport);
+			myConnection->nxt_set_motor_with_limit(-100, gripperangle, gripperport);
 			
 		}else{
-			nxt_set_motor(100, gripperport);
-			nxt_set_motor_with_limit(100, -gripperangle, gripperport);
+			myConnection->nxt_set_motor(100, gripperport);
+			myConnection->nxt_set_motor_with_limit(100, -gripperangle, gripperport);
 		}
 		// put gripper data
 		player_gripper_data_t data2;
@@ -535,7 +545,7 @@ void NXTDriver::UpdateSonars()
 	
 	float * ranges = new float[sonarcount];
 	for(int i = 0; i < sonarcount; i++){
-		ranges[i] = getSonarValue(this->sonars[i]);
+		ranges[i] = myConnection->getSonarValue(this->sonars[i]);
 	}
 	sonardata.ranges_count = sonarcount;
 	sonardata.ranges = ranges;
@@ -552,7 +562,7 @@ void NXTDriver::UpdateLightSensors()
 	
 	double * ranges = new double[lightsensorcount];
 	for(int i = 0; i < lightsensorcount; i++){
-		ranges[i] = getLightValue(this->lightsensors[i]);
+		ranges[i] = myConnection->getLightValue(this->lightsensors[i]);
 	}
 	lightdata.ranges_count = lightsensorcount;
 	lightdata.ranges = ranges;
@@ -569,7 +579,7 @@ void NXTDriver::UpdateSoundSensors()
 	
 	double * ranges = new double[soundsensorcount];
 	for(int i = 0; i < soundsensorcount; i++){
-		ranges[i] = getSoundValue(this->soundsensors[i]);
+		ranges[i] = myConnection->getSoundValue(this->soundsensors[i]);
 	}
 	sounddata.ranges_count = soundsensorcount;
 	sounddata.ranges = ranges;
@@ -584,7 +594,7 @@ void NXTDriver::UpdateBumpers()
      memset(&bumperdata,0,sizeof(bumperdata));	
 	uint8_t * bumpervalues = new uint8_t[bumpercount];
 	for(int i = 0; i < bumpercount; i++){
-		bumpervalues[i] = getBumperValue(this->bumpers[i]);
+		bumpervalues[i] = myConnection->getBumperValue(this->bumpers[i]);
 	}
      
      bumperdata.bumpers_count = bumpercount;
