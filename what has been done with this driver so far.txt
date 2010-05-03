@@ -39,3 +39,10 @@ to call really dumb drive function
 1)figure out what needs to be done for NXT::Shutdown() in nxt driver, and do it
 2)
 3)
+
+
+ (\_/)
+ (0_o)
+c(")-(")
+Acnowlegements!
+I stole most of the USB code from NXT++ and BT code from Vikram Aggarwal's BT sample code
