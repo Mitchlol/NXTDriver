@@ -65,7 +65,6 @@ int main(int argc, char *argv[]){
 		std::cout << " sound =  "<< srp[0];
 		std::cout << " light =  "<< lrp[0];
 		std::cout << "Bumper = " << bp[0] << std::endl;
-		std::cout << " light =  "<< lrp[0] << " " << lrp[1] << std::endl;
 		/*
 		if(lrp[0] - lrp[1] >=7){
 			pp.SetSpeed(-100, 0);
@@ -87,7 +86,6 @@ int main(int argc, char *argv[]){
 		}else{
 			pp.SetSpeed(0, 0);
 		}
-		
 		
 		// Read from the proxies
 		//robot.Read();

@@ -5,7 +5,7 @@
 
 #include "Connection.cc"
 #include "USBConnection.cc"
-//#include "BTConnection.cc"
+#include "BTConnection.cc"
 
 #include <libplayercore/playercore.h>
 
@@ -60,6 +60,7 @@ class NXTDriver : public ThreadedDriver
     int *bumpers;
     int gripperport;
     int gripperangle;
+    char *btaddress;
 
     Connection *myConnection;
 };

@@ -155,7 +155,7 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	
 	// Read an option from the configuration file
 	this->foop = cf->ReadInt(section, "foo", 0);
-	//check for diofferential drive
+	//check for differential drive
 	const char* drive = cf->ReadString(section, "drive", "none");
 	if(strcmp(drive,"none") == 0){
 		this->diffdrive = false;
@@ -302,6 +302,14 @@ NXTDriver::NXTDriver(ConfigFile* cf, int section)
 	}else if(this->gripperangle > 0){
 		printf("Gripper Angle = %d\n", this->gripperangle);
 	}
+
+	//check for Bluetooth ID
+	this->btaddress = const_cast < char *>(cf->ReadString(section, "btaddress", "none"));
+	if(strcmp(btaddress,"none") == 0){
+		puts("no btport, using USB...");
+	}else{
+		printf("btaddress = %s\n", this->btaddress);
+	}
 	
 	
 	// Message for checking status:
@@ -317,21 +325,15 @@ int NXTDriver::MainSetup()
 
   // Here you do whatever is necessary to setup the device, like open and
   // configure a serial port.
-	/*	
-	struct usb_device *DevInit();
-	DevOpen();
-	if (pUSBHandle == 0){
-		puts("pUSBHandle = 0");
-		return -1;
+//"00:16:53:02:D5:C8"
+	if(strcmp(btaddress,"none") == 0){
+		USBConnection *myUSBConnection = new USBConnection;
+		myConnection = dynamic_cast<Connection*>(myUSBConnection);
+	}else{
+		BTConnection *myBTConnection = new BTConnection(this->btaddress);
+		this->myConnection = dynamic_cast<Connection*>(myBTConnection);
 	}
-	*/
 
-	USBConnection *myUSBConnection = new USBConnection;
-	myConnection = dynamic_cast<Connection*>(myUSBConnection);
-/*
-	BTConnection *myBTConnection = new BTConnection("00:16:53:02:D5:C8");
-	this->myConnection = dynamic_cast<Connection*>(myBTConnection);
-*/
 	if(myConnection->nxt_connect() == true){
 		puts("Connected");
 		printf("Was foo option given in config file? %d\n", this->foop);

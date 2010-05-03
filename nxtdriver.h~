@@ -60,6 +60,7 @@ class NXTDriver : public ThreadedDriver
     int *bumpers;
     int gripperport;
     int gripperangle;
+    char *btport;
 
     Connection *myConnection;
 };

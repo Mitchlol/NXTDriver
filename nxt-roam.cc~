@@ -82,12 +82,11 @@ int main(int argc, char *argv[]){
 		if(sp[0] <= 10){
 			gp.Close();
 		}
-		if(srp[0] >= 90{
+		if(srp[0] >= 90){
 			pp.SetSpeed(100, 0);
 		}else{
 			pp.SetSpeed(0, 0);
 		}
-		
 		
 		// Read from the proxies
 		//robot.Read();
