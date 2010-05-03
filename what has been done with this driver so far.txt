@@ -27,7 +27,13 @@ to call really dumb drive function
 24)updated config parsing to recognise both sound and light rangers added usage info to nxt.cfg
 25)added update sound function now driver supports sound
 26)added bumper, just pretend i wrote this as 3 steps like the previous sensors
-27)aded gripper, repeat.....
+27)aded gripper, repeat...
+28)create stub connection class, that has eampty versions all the NXTcomms funtions
+29)create child of connection class called USBconnection that is OOP version of NXTxomms and extends connection
+30)replace all direct function calls to NXTComms with use of a connection pointer that is really a pointer to a USBConnection
+31)write a BTConnection class that is the same as USB connection but uses BT
+32)parse config for BTAddress and cast connection object accordingly
+
 
 (''\___TODO____/'')
 1)figure out what needs to be done for NXT::Shutdown() in nxt driver, and do it
