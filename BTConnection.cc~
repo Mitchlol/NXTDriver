@@ -23,6 +23,7 @@ class BTConnection : public Connection{
 /////////////////////
 //BT Connect Stuff//
 ///////////////////
+private:
 	int nxtSocket;
 	char *btAddress;
 
@@ -49,7 +50,7 @@ class BTConnection : public Connection{
 		return 0;
 	}
 
-
+public:
 ////////////////
 //konztuktzor//
 //////////////
@@ -345,18 +346,24 @@ class BTConnection : public Connection{
 	}
 	//this is exactly the same as get light value
 	int getSoundValue(unsigned char port){
+		// Bluetooth length
+		unsigned char btLength[2];
+			btLength[0]= 3;
+			btLength[1]= 0x00;
+		//messag
+		unsigned char directCommandBuffer[256];
+			directCommandBuffer[0] = 0x00;//return
+			directCommandBuffer[1] = 0x07;//command - lsread
+			directCommandBuffer[2] = port;//port
+		//write		
+		write(nxtSocket, btLength, 2);
+		write(nxtSocket, directCommandBuffer, btLength[0]);
+
+		unsigned char directReadBuffer[256];
+		read(nxtSocket, directReadBuffer, 2);
+		read(nxtSocket, directReadBuffer, 16);
 	
-		unsigned char directCommandBuffer22[256];
-		directCommandBuffer22[0] = 0x00;//return
-		directCommandBuffer22[1] = 0x07;//command - lsread
-		directCommandBuffer22[2] = port;//port
-	
-		unsigned char directReadBuffer22[256];
-	
-		usb_bulk_write(pUSBHandle, ucEpIn, reinterpret_cast < char *>(directCommandBuffer22), 3, 0x0BB8);
-		usb_bulk_read(pUSBHandle, ucEpOut, reinterpret_cast < char *>(directReadBuffer22), 16, 0x0BB8);
-	
-		return directReadBuffer22[12];
+		return directReadBuffer[12];
 	}
 
 
@@ -390,9 +397,9 @@ class BTConnection : public Connection{
 			btLength[1]= 0x00;
 		//message
 		unsigned char directCommandBuffer[256];
-		directCommandBuffer[0] = 0x00;//return
-		directCommandBuffer[1] = 0x07;//command - lsread
-		directCommandBuffer[2] = port;//port
+			directCommandBuffer[0] = 0x00;//return
+			directCommandBuffer[1] = 0x07;//command - lsread
+			directCommandBuffer[2] = port;//port
 		//write		
 		write(nxtSocket, btLength, 2);
 		write(nxtSocket, directCommandBuffer, btLength[0]);

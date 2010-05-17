@@ -63,6 +63,6 @@ driver
   soundsensorports ["4"]
   gripperport "C"
   gripperangle "45"
-#  btport "00:16:53:02:D5:C8"
+  btaddress "00:16:53:02:D5:C8"
 
 ) 

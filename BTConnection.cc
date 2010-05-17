@@ -1,3 +1,12 @@
+//!BTConnection class is the child of the Connection class used for Bluetooth communitcation.
+/*!
+ *This is the Bluetooth version of the Connection class.
+ *It should be 100% functional when it is cast to a connection or vice versa....
+ *@see Connection
+ *@see USBConnection	
+ */
+
+
 
 // Socket, used for Bluetooth rfcomm 
 #include <sys/socket.h>
@@ -18,11 +27,11 @@
 
 
 class BTConnection : public Connection{
-	public:
 
 /////////////////////
 //BT Connect Stuff//
 ///////////////////
+private:
 	int nxtSocket;
 	char *btAddress;
 
@@ -49,7 +58,7 @@ class BTConnection : public Connection{
 		return 0;
 	}
 
-
+public:
 ////////////////
 //konztuktzor//
 //////////////

@@ -23,11 +23,11 @@ int main(int argc, char *argv[]){
 	// Set up proxies
 	PlayerClient    robot("localhost");
 	Position2dProxy pp(&robot,0);
-	SonarProxy      sp(&robot,0);
-	RangerProxy	 lrp(&robot,0);
+	//SonarProxy      sp(&robot,0);
+	//RangerProxy	 lrp(&robot,0);
 	RangerProxy	 srp(&robot,1);
-	BumperProxy	 bp(&robot,0);
-	GripperProxy	 gp(&robot,0);
+	//BumperProxy	 bp(&robot,0);
+	//GripperProxy	 gp(&robot,0);
 	std::cout << "After Proxy Setup "<< std::endl;
 	// Allow the program to take charge of the motors (take care now)
 	pp.SetMotorEnable(true);
@@ -61,10 +61,11 @@ int main(int argc, char *argv[]){
 		robot.Read();
 		//std::cout << "loop end, x = " << x << " y = " << 0 << ", sonar = " << sp[0] << " "<< sp[1] << " "<< sp[2] << " "<< sp[3] << std::endl;
 		
-		std::cout << "sonar = " << sp[0];
+		//std::cout << "sonar = " << sp[0];
 		std::cout << " sound =  "<< srp[0];
-		std::cout << " light =  "<< lrp[0];
-		std::cout << "Bumper = " << bp[0] << std::endl;
+		//std::cout << " light =  "<< lrp[0];
+		//std::cout << "Bumper = " << bp[0];
+		std::cout << std::endl;
 		/*
 		if(lrp[0] - lrp[1] >=7){
 			pp.SetSpeed(-100, 0);
@@ -75,13 +76,13 @@ int main(int argc, char *argv[]){
 		}
 		*/
 		
-		if(bp[0] == 1){
-			gp.Open();
-		}
-		if(sp[0] <= 10){
-			gp.Close();
-		}
-		if(srp[0] >= 90){
+		//if(bp[0] == 1){
+		//	gp.Open();
+		//}
+		//if(sp[0] <= 10){
+		//	gp.Close();
+		//}
+		if(srp[0] >= 50){
 			pp.SetSpeed(100, 0);
 		}else{
 			pp.SetSpeed(0, 0);

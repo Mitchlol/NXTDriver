@@ -1,3 +1,13 @@
+//!USBConnection class is the child of the Connection class used for USB communitcation.
+/*!
+ *This is the USB version of the Connection class.
+ *It should be 100% functional when it is cast to a connection or vice versa....
+ *@see Connection
+ *@see BTConnection	
+ */
+
+
+
 #include <unistd.h>
 #include <string.h>
 
@@ -8,12 +18,11 @@
 #include "Connection.cc"
 
 class USBConnection : public Connection{
-public:
 
 //////////////////////
 //USB Connect Stuff//
 ////////////////////
-
+private:
 	static const int NXT_VENDOR_ID = 0x0694;
 	static const int NXT_PRODUCT_ID = 0x0002;
 	
@@ -89,7 +98,10 @@ public:
 		}
 		return 1;
 	}
-
+public:
+////////////////
+//konztuktzor//
+//////////////
 	USBConnection(){
 
 		pUSBHandle = 0;
