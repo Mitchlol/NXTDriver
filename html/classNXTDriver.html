@@ -26,28 +26,37 @@
 </div>
 <div class="contents">
 <h1>NXTDriver Class Reference</h1><!-- doxytag: class="NXTDriver" -->
+<p>The NXT player Stage Driver.  
+<a href="#_details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nxtdriver_8h_source.html">nxtdriver.h</a>&gt;</code></p>
+
 <p><a href="classNXTDriver-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee8220514a1633aaf6e1dc949dc45704"></a><!-- doxytag: member="NXTDriver::NXTDriver" ref="aee8220514a1633aaf6e1dc949dc45704" args="(ConfigFile *cf, int section)" -->
-&nbsp;</td><td class="memItemRight" valign="bottom"><b>NXTDriver</b> (ConfigFile *cf, int section)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f2360693190babda2d7a08f122d55c1"></a><!-- doxytag: member="NXTDriver::ProcessMessage" ref="a1f2360693190babda2d7a08f122d55c1" args="(QueuePointer &amp;resp_queue, player_msghdr *hdr, void *data)" -->
-virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><b>ProcessMessage</b> (QueuePointer &amp;resp_queue, player_msghdr *hdr, void *data)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#aee8220514a1633aaf6e1dc949dc45704">NXTDriver</a> (ConfigFile *cf, int section)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor, all the config file parsing is done here.  <a href="#aee8220514a1633aaf6e1dc949dc45704"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a1f2360693190babda2d7a08f122d55c1">ProcessMessage</a> (QueuePointer &amp;resp_queue, player_msghdr *hdr, void *data)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This method will be invoked on each incoming message.  <a href="#a1f2360693190babda2d7a08f122d55c1"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf3180ef1dd569f525228ddb2a791c11"></a><!-- doxytag: member="NXTDriver::Main" ref="abf3180ef1dd569f525228ddb2a791c11" args="()" -->
-virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>Main</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a638c6fd442494ebca81583a62410cb93"></a><!-- doxytag: member="NXTDriver::MainSetup" ref="a638c6fd442494ebca81583a62410cb93" args="()" -->
-virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><b>MainSetup</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab600f5dda01b40907eee44286df7a2b6"></a><!-- doxytag: member="NXTDriver::MainQuit" ref="ab600f5dda01b40907eee44286df7a2b6" args="()" -->
-virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>MainQuit</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#abf3180ef1dd569f525228ddb2a791c11">Main</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Main function for device thread.  <a href="#abf3180ef1dd569f525228ddb2a791c11"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a638c6fd442494ebca81583a62410cb93">MainSetup</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Setup Function.  <a href="#a638c6fd442494ebca81583a62410cb93"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#ab600f5dda01b40907eee44286df7a2b6">MainQuit</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Quit function, should probably be implemented....  <a href="#ab600f5dda01b40907eee44286df7a2b6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa67e8cc4d2f1f0f1eee1d348120e5f1f"></a><!-- doxytag: member="NXTDriver::UpdateSonars" ref="aa67e8cc4d2f1f0f1eee1d348120e5f1f" args="()" -->
-virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>UpdateSonars</b> ()</td></tr>
+virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#aa67e8cc4d2f1f0f1eee1d348120e5f1f">UpdateSonars</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Function to update the robots Sonar data. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29e24a3b1e3ca30d11db42c85ede907e"></a><!-- doxytag: member="NXTDriver::UpdateLightSensors" ref="a29e24a3b1e3ca30d11db42c85ede907e" args="()" -->
-virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>UpdateLightSensors</b> ()</td></tr>
+virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a29e24a3b1e3ca30d11db42c85ede907e">UpdateLightSensors</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Function to update the robots Light Sensor data. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af341d31d9f850043787a97d3c852a896"></a><!-- doxytag: member="NXTDriver::UpdateSoundSensors" ref="af341d31d9f850043787a97d3c852a896" args="()" -->
-virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>UpdateSoundSensors</b> ()</td></tr>
+virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#af341d31d9f850043787a97d3c852a896">UpdateSoundSensors</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Function to update the robots Sound Sensor data. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac38bb5bf0521b7aec93077fb2eda29ce"></a><!-- doxytag: member="NXTDriver::UpdateBumpers" ref="ac38bb5bf0521b7aec93077fb2eda29ce" args="()" -->
-virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>UpdateBumpers</b> ()</td></tr>
+virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#ac38bb5bf0521b7aec93077fb2eda29ce">UpdateBumpers</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Function to update the robots Bumper data. <br/></td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd9441dabc7343f378c04e26e93d6077"></a><!-- doxytag: member="NXTDriver::position_addr" ref="acd9441dabc7343f378c04e26e93d6077" args="" -->
 player_devaddr_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#acd9441dabc7343f378c04e26e93d6077">position_addr</a></td></tr>
@@ -70,42 +79,190 @@ player_devaddr_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af2d73d7387f675a6ecf82b333d877bfc"></a><!-- doxytag: member="NXTDriver::foop" ref="af2d73d7387f675a6ecf82b333d877bfc" args="" -->
 int&nbsp;</td><td class="memItemRight" valign="bottom"><b>foop</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6694512d26c432849d2c07f4df693913"></a><!-- doxytag: member="NXTDriver::diffdrive" ref="a6694512d26c432849d2c07f4df693913" args="" -->
-bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>diffdrive</b></td></tr>
+bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a6694512d26c432849d2c07f4df693913">diffdrive</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Differential Drive flag, other drives may be implemented at some point. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e4d2171b270cca628d1990c104e07dd"></a><!-- doxytag: member="NXTDriver::rightwheel" ref="a8e4d2171b270cca628d1990c104e07dd" args="" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>rightwheel</b></td></tr>
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a8e4d2171b270cca628d1990c104e07dd">rightwheel</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Which port is the right wheel (for diff drive). <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29f6ade73b321a8297681ee55a4ad062"></a><!-- doxytag: member="NXTDriver::leftwheel" ref="a29f6ade73b321a8297681ee55a4ad062" args="" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>leftwheel</b></td></tr>
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a29f6ade73b321a8297681ee55a4ad062">leftwheel</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Which port is the left wheel (for diff drive). <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8fd48fc0e5f1407e474ca28339d7aa32"></a><!-- doxytag: member="NXTDriver::sonarcount" ref="a8fd48fc0e5f1407e474ca28339d7aa32" args="" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>sonarcount</b></td></tr>
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a8fd48fc0e5f1407e474ca28339d7aa32">sonarcount</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Numper of Sonars. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a56f40b91dfce49ce228150313fde42"></a><!-- doxytag: member="NXTDriver::sonars" ref="a5a56f40b91dfce49ce228150313fde42" args="" -->
-int *&nbsp;</td><td class="memItemRight" valign="bottom"><b>sonars</b></td></tr>
+int *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a5a56f40b91dfce49ce228150313fde42">sonars</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">An array of sonar port numbers. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af925879f85d703c2b60f81528bb4917d"></a><!-- doxytag: member="NXTDriver::lightsensorcount" ref="af925879f85d703c2b60f81528bb4917d" args="" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>lightsensorcount</b></td></tr>
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#af925879f85d703c2b60f81528bb4917d">lightsensorcount</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Number of Light Sensors. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a97fce5bebe1b32fba6a765649d9d19cc"></a><!-- doxytag: member="NXTDriver::lightsensors" ref="a97fce5bebe1b32fba6a765649d9d19cc" args="" -->
-int *&nbsp;</td><td class="memItemRight" valign="bottom"><b>lightsensors</b></td></tr>
+int *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a97fce5bebe1b32fba6a765649d9d19cc">lightsensors</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">An array of Light Sensor port numbers. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d120d9e99ac24c2c40c0ff899e72cd8"></a><!-- doxytag: member="NXTDriver::soundsensorcount" ref="a2d120d9e99ac24c2c40c0ff899e72cd8" args="" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>soundsensorcount</b></td></tr>
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a2d120d9e99ac24c2c40c0ff899e72cd8">soundsensorcount</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Number of Sound Sensors. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9769e8c92d2491a59c669456fc883bf9"></a><!-- doxytag: member="NXTDriver::soundsensors" ref="a9769e8c92d2491a59c669456fc883bf9" args="" -->
-int *&nbsp;</td><td class="memItemRight" valign="bottom"><b>soundsensors</b></td></tr>
+int *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a9769e8c92d2491a59c669456fc883bf9">soundsensors</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">An array of Sound Sensor port numbers. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2dcf2b25dfabe7a379604e2472aad291"></a><!-- doxytag: member="NXTDriver::bumpercount" ref="a2dcf2b25dfabe7a379604e2472aad291" args="" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>bumpercount</b></td></tr>
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a2dcf2b25dfabe7a379604e2472aad291">bumpercount</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Number of Bumpers. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8069f14b1972dd74be1847f06d121241"></a><!-- doxytag: member="NXTDriver::bumpers" ref="a8069f14b1972dd74be1847f06d121241" args="" -->
-int *&nbsp;</td><td class="memItemRight" valign="bottom"><b>bumpers</b></td></tr>
+int *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a8069f14b1972dd74be1847f06d121241">bumpers</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">An array of Bumper Port numbers. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad749d96826786f1a0e07cd601466b455"></a><!-- doxytag: member="NXTDriver::gripperport" ref="ad749d96826786f1a0e07cd601466b455" args="" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>gripperport</b></td></tr>
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#ad749d96826786f1a0e07cd601466b455">gripperport</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Port number for the gripper. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8c0ca1002d4cf301d8bba0231f55ca3c"></a><!-- doxytag: member="NXTDriver::gripperangle" ref="a8c0ca1002d4cf301d8bba0231f55ca3c" args="" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>gripperangle</b></td></tr>
+int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a8c0ca1002d4cf301d8bba0231f55ca3c">gripperangle</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">the number of degrees to rotate the gripper back and forth for open and close. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28fb241394b704132b5c89052435d8ec"></a><!-- doxytag: member="NXTDriver::btaddress" ref="a28fb241394b704132b5c89052435d8ec" args="" -->
-char *&nbsp;</td><td class="memItemRight" valign="bottom"><b>btaddress</b></td></tr>
+char *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a28fb241394b704132b5c89052435d8ec">btaddress</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">the BT address of the NXT we want to use. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6dad171ef1a5ed6c6d00941f7f9c316f"></a><!-- doxytag: member="NXTDriver::myConnection" ref="a6dad171ef1a5ed6c6d00941f7f9c316f" args="" -->
-<a class="el" href="classConnection.html">Connection</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><b>myConnection</b></td></tr>
+<a class="el" href="classConnection.html">Connection</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNXTDriver.html#a6dad171ef1a5ed6c6d00941f7f9c316f">myConnection</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><a class="el" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> object used to talk to the NXT it is cast to USB or BT <a class="el" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a>. <br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>The NXT player Stage Driver. </p>
+<p>This is the main part of the driver, it is based off the example driver included in the player stage source. The class for the driver </p>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aee8220514a1633aaf6e1dc949dc45704"></a><!-- doxytag: member="NXTDriver::NXTDriver" ref="aee8220514a1633aaf6e1dc949dc45704" args="(ConfigFile *cf, int section)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NXTDriver::NXTDriver </td>
+          <td>(</td>
+          <td class="paramtype">ConfigFile *&nbsp;</td>
+          <td class="paramname"> <em>cf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>section</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructor, all the config file parsing is done here. </p>
+<p>Constructor. Retrieve options from the configuration file and do any pre-Setup() setup. </p>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="abf3180ef1dd569f525228ddb2a791c11"></a><!-- doxytag: member="NXTDriver::Main" ref="abf3180ef1dd569f525228ddb2a791c11" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NXTDriver::Main </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Main function for device thread. </p>
+<p>Main function for device thread </p>
+
+</div>
+</div>
+<a class="anchor" id="ab600f5dda01b40907eee44286df7a2b6"></a><!-- doxytag: member="NXTDriver::MainQuit" ref="ab600f5dda01b40907eee44286df7a2b6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NXTDriver::MainQuit </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Quit function, should probably be implemented.... </p>
+<p>Shutdown the device </p>
+
+</div>
+</div>
+<a class="anchor" id="a638c6fd442494ebca81583a62410cb93"></a><!-- doxytag: member="NXTDriver::MainSetup" ref="a638c6fd442494ebca81583a62410cb93" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int NXTDriver::MainSetup </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Setup Function. </p>
+<p>Set up the device. Return 0 if things go well, and -1 otherwise. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1f2360693190babda2d7a08f122d55c1"></a><!-- doxytag: member="NXTDriver::ProcessMessage" ref="a1f2360693190babda2d7a08f122d55c1" args="(QueuePointer &amp;resp_queue, player_msghdr *hdr, void *data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int NXTDriver::ProcessMessage </td>
+          <td>(</td>
+          <td class="paramtype">QueuePointer &amp;&nbsp;</td>
+          <td class="paramname"> <em>resp_queue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">player_msghdr *&nbsp;</td>
+          <td class="paramname"> <em>hdr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&nbsp;</td>
+          <td class="paramname"> <em>data</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>This method will be invoked on each incoming message. </p>
+
+<p><p>Process messages here. Send a response if necessary, using Publish(). If you handle the message successfully, return 0. Otherwise, return -1, and a NACK will be sent for you, if a response is required. </p>
+</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="nxtdriver_8h_source.html">nxtdriver.h</a></li>
 <li>nxtdriver.cc</li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Jun 1 17:35:15 2010 by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jun 3 12:57:23 2010 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

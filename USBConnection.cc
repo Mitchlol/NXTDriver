@@ -1,6 +1,6 @@
 //!USBConnection class is the child of the Connection class used for USB communitcation.
 /*!
- *This is the USB version of the Connection class.
+ *This is the USB version of the Connection class. It uses libusb to send direct commands to NXT over a usb connection.
  *It should be 100% functional when it is cast to a connection or vice versa....
  *@see Connection
  *@see BTConnection	

@@ -1,6 +1,9 @@
 //!BTConnection class is the child of the Connection class used for Bluetooth communitcation.
 /*!
- *This is the Bluetooth version of the Connection class.
+ *This is the Bluetooth version of the Connection class. It uses the same Direct messages as USBConnection.
+ *Except that it first sends a 2 byte packet containing the length of the packet about to be sent.
+ *See the USBConnection class for more documentation.
+ *
  *It should be 100% functional when it is cast to a connection or vice versa....
  *@see Connection
  *@see USBConnection	
@@ -34,7 +37,9 @@ class BTConnection : public Connection{
 private:
 	int nxtSocket;
 	char *btAddress;
-
+//!Bluetooth Connection Function
+/*!This is a function to open a bluetooth connection. Coppied from Vikram Aggarwal's BT sample code.
+ */
 	int init_bluetooth(char *btAddress){
 		struct sockaddr_rc addr={0};
 		int status;

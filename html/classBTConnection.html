@@ -73,8 +73,8 @@ Inheritance diagram for BTConnection:</div>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBTConnection.html#ae26206963cb96b5be1e1700ecf42f8c8">getBumperValue</a> (unsigned char port)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Retrieve an bumper value from the NXT.  <a href="#ae26206963cb96b5be1e1700ecf42f8c8"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa4d1adb67bc48713f57aa5f1e1c640d6"></a><!-- doxytag: member="BTConnection::init_bluetooth" ref="aa4d1adb67bc48713f57aa5f1e1c640d6" args="(char *btAddress)" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>init_bluetooth</b> (char *btAddress)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBTConnection.html#aa4d1adb67bc48713f57aa5f1e1c640d6">init_bluetooth</a> (char *btAddress)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Bluetooth <a class="el" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> Function.  <a href="#aa4d1adb67bc48713f57aa5f1e1c640d6"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af63aef018573dd7436a93ac3f0fa9d89"></a><!-- doxytag: member="BTConnection::nxtSocket" ref="af63aef018573dd7436a93ac3f0fa9d89" args="" -->
 int&nbsp;</td><td class="memItemRight" valign="bottom"><b>nxtSocket</b></td></tr>
@@ -83,7 +83,8 @@ char *&nbsp;</td><td class="memItemRight" valign="bottom"><b>btAddress</b></td><
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p><a class="el" href="classBTConnection.html" title="BTConnection class is the child of the Connection class used for Bluetooth communitcation...">BTConnection</a> class is the child of the <a class="el" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> class used for Bluetooth communitcation. </p>
-<p>This is the Bluetooth version of the <a class="el" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> class. It should be 100% functional when it is cast to a connection or vice versa.... </p>
+<p>This is the Bluetooth version of the <a class="el" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> class. It uses the same Direct messages as <a class="el" href="classUSBConnection.html" title="USBConnection class is the child of the Connection class used for USB communitcation...">USBConnection</a>. Except that it first sends a 2 byte packet containing the length of the packet about to be sent. See the <a class="el" href="classUSBConnection.html" title="USBConnection class is the child of the Connection class used for USB communitcation...">USBConnection</a> class for more documentation.</p>
+<p>It should be 100% functional when it is cast to a connection or vice versa.... </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> </dd>
 <dd>
 <a class="el" href="classUSBConnection.html" title="USBConnection class is the child of the Connection class used for USB communitcation...">USBConnection</a> </dd></dl>
@@ -249,6 +250,27 @@ Implementation</a></h2>
 <p>In the <a class="el" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> class this allways returns -1. </p>
 
 <p>Reimplemented from <a class="el" href="classConnection.html#a1ca1471faf4742213e1635ed27f379c6">Connection</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa4d1adb67bc48713f57aa5f1e1c640d6"></a><!-- doxytag: member="BTConnection::init_bluetooth" ref="aa4d1adb67bc48713f57aa5f1e1c640d6" args="(char *btAddress)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BTConnection::init_bluetooth </td>
+          <td>(</td>
+          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramname"> <em>btAddress</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline, private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Bluetooth <a class="el" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> Function. </p>
+<p>This is a function to open a bluetooth connection. Coppied from Vikram Aggarwal's BT sample code. </p>
 
 </div>
 </div>
@@ -565,7 +587,7 @@ Implementation</a></h2>
 <li>BTConnection.cc</li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Jun 1 17:35:15 2010 by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jun 3 12:57:23 2010 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

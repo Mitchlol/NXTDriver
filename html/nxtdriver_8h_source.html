@@ -21,79 +21,78 @@
       <li><a href="files.html"><span>File&nbsp;List</span></a></li>
     </ul>
   </div>
-<h1>nxtdriver.h</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef NXTDRIVER</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define NXTDRIVER</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;unistd.h&gt;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;Connection.cc&quot;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;USBConnection.cc&quot;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;BTConnection.cc&quot;</span>
+<h1>nxtdriver.h</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 
+<a name="l00005"></a>00005 <span class="preprocessor">#ifndef NXTDRIVER</span>
+<a name="l00006"></a>00006 <span class="preprocessor"></span><span class="preprocessor">#define NXTDRIVER</span>
+<a name="l00007"></a>00007 <span class="preprocessor"></span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;unistd.h&gt;</span>
 <a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;libplayercore/playercore.h&gt;</span>
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012 
-<a name="l00014"></a>00014 <span class="comment">// The class for the driver</span>
-<a name="l00015"></a><a class="code" href="classNXTDriver.html">00015</a> <span class="keyword">class </span><a class="code" href="classNXTDriver.html">NXTDriver</a> : <span class="keyword">public</span> ThreadedDriver
-<a name="l00016"></a>00016 {
-<a name="l00017"></a>00017   <span class="keyword">public</span>:
-<a name="l00018"></a>00018     
-<a name="l00019"></a>00019     <span class="comment">// Constructor; need that</span>
-<a name="l00020"></a>00020     <a class="code" href="classNXTDriver.html">NXTDriver</a>(ConfigFile* cf, <span class="keywordtype">int</span> section);
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022     <span class="comment">// Must implement the following methods.</span>
-<a name="l00023"></a>00023     <span class="comment">//virtual int Setup();</span>
-<a name="l00024"></a>00024     <span class="comment">//virtual int Shutdown();</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;Connection.cc&quot;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;USBConnection.cc&quot;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;BTConnection.cc&quot;</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;libplayercore/playercore.h&gt;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 
+<a name="l00019"></a><a class="code" href="classNXTDriver.html">00019</a> <span class="keyword">class </span><a class="code" href="classNXTDriver.html" title="The NXT player Stage Driver.">NXTDriver</a> : <span class="keyword">public</span> ThreadedDriver
+<a name="l00020"></a>00020 {
+<a name="l00021"></a>00021   <span class="keyword">public</span>:
+<a name="l00022"></a>00022     
+<a name="l00024"></a>00024     <a class="code" href="classNXTDriver.html#aee8220514a1633aaf6e1dc949dc45704" title="Constructor, all the config file parsing is done here.">NXTDriver</a>(ConfigFile* cf, <span class="keywordtype">int</span> section);
 <a name="l00025"></a>00025 
-<a name="l00026"></a>00026     <span class="comment">// This method will be invoked on each incoming message</span>
-<a name="l00027"></a>00027     <span class="keyword">virtual</span> <span class="keywordtype">int</span> ProcessMessage(QueuePointer &amp;resp_queue, 
-<a name="l00028"></a>00028                                player_msghdr * hdr,
-<a name="l00029"></a>00029                                <span class="keywordtype">void</span> * data);
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031   <span class="keyword">private</span>:
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033     <span class="comment">// Main function for device thread.</span>
-<a name="l00034"></a>00034     <span class="keyword">virtual</span> <span class="keywordtype">void</span> Main();
-<a name="l00035"></a>00035     <span class="keyword">virtual</span> <span class="keywordtype">int</span> MainSetup();
-<a name="l00036"></a>00036     <span class="keyword">virtual</span> <span class="keywordtype">void</span> MainQuit();
-<a name="l00037"></a>00037     <span class="keyword">virtual</span> <span class="keywordtype">void</span> UpdateSonars();
-<a name="l00038"></a>00038     <span class="keyword">virtual</span> <span class="keywordtype">void</span> UpdateLightSensors();
-<a name="l00039"></a>00039     <span class="keyword">virtual</span> <span class="keywordtype">void</span> UpdateSoundSensors();
-<a name="l00040"></a>00040     <span class="keyword">virtual</span> <span class="keywordtype">void</span> UpdateBumpers();
-<a name="l00041"></a>00041         
-<a name="l00042"></a><a class="code" href="classNXTDriver.html#acd9441dabc7343f378c04e26e93d6077">00042</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#acd9441dabc7343f378c04e26e93d6077" title="Address of the position device (wheels odometry).">position_addr</a>; 
-<a name="l00043"></a><a class="code" href="classNXTDriver.html#ac5790300252a8a1a2cbdfd7846288251">00043</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#ac5790300252a8a1a2cbdfd7846288251" title="Address of the sonar device.">sonar_addr</a>; 
-<a name="l00044"></a><a class="code" href="classNXTDriver.html#a2286ed3e7bbc46c8b05748785a30e2ef">00044</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#a2286ed3e7bbc46c8b05748785a30e2ef" title="Address of the light device.">light_addr</a>; 
-<a name="l00045"></a><a class="code" href="classNXTDriver.html#a85752cdabcd75bf510a7fd24fbd3a08e">00045</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#a85752cdabcd75bf510a7fd24fbd3a08e" title="Address of the sound device.">sound_addr</a>; 
-<a name="l00046"></a><a class="code" href="classNXTDriver.html#a1ac36f7f306163f90f84e89cc2a60afd">00046</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#a1ac36f7f306163f90f84e89cc2a60afd" title="Address of the bumper device.">bumper_addr</a>; 
-<a name="l00047"></a><a class="code" href="classNXTDriver.html#ae73dd5fd68ab18f6085e7a34d6f1cc77">00047</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#ae73dd5fd68ab18f6085e7a34d6f1cc77" title="Address of the bumper device.">gripper_addr</a>; 
-<a name="l00048"></a>00048         
-<a name="l00049"></a>00049     <span class="keywordtype">int</span> foop;
-<a name="l00050"></a>00050     <span class="keywordtype">bool</span> diffdrive;
-<a name="l00051"></a>00051     <span class="keywordtype">int</span> rightwheel;
-<a name="l00052"></a>00052     <span class="keywordtype">int</span> leftwheel;
-<a name="l00053"></a>00053     <span class="keywordtype">int</span> sonarcount;
-<a name="l00054"></a>00054     <span class="keywordtype">int</span> *sonars;
-<a name="l00055"></a>00055     <span class="keywordtype">int</span> lightsensorcount;
-<a name="l00056"></a>00056     <span class="keywordtype">int</span> *lightsensors;
-<a name="l00057"></a>00057     <span class="keywordtype">int</span> soundsensorcount;
-<a name="l00058"></a>00058     <span class="keywordtype">int</span> *soundsensors;
-<a name="l00059"></a>00059     <span class="keywordtype">int</span> bumpercount;
-<a name="l00060"></a>00060     <span class="keywordtype">int</span> *bumpers;
-<a name="l00061"></a>00061     <span class="keywordtype">int</span> gripperport;
-<a name="l00062"></a>00062     <span class="keywordtype">int</span> gripperangle;
-<a name="l00063"></a>00063     <span class="keywordtype">char</span> *btaddress;
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065     <a class="code" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> *myConnection;
-<a name="l00066"></a>00066 };
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068 Driver* NXTDriver_Init(ConfigFile *cf, <span class="keywordtype">int</span> section);
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070 <span class="keywordtype">void</span> NXTDriver_Register(DriverTable *table);
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072 <span class="preprocessor">#endif </span><span class="comment">/* NXTDRIVER */</span>
+<a name="l00026"></a>00026     <span class="comment">// Must implement the following methods.</span>
+<a name="l00027"></a>00027     <span class="comment">//virtual int Setup();</span>
+<a name="l00028"></a>00028     <span class="comment">//virtual int Shutdown();</span>
+<a name="l00029"></a>00029 
+<a name="l00031"></a>00031     <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#a1f2360693190babda2d7a08f122d55c1" title="This method will be invoked on each incoming message.">ProcessMessage</a>(QueuePointer &amp;resp_queue, 
+<a name="l00032"></a>00032                                player_msghdr * hdr,
+<a name="l00033"></a>00033                                <span class="keywordtype">void</span> * data);
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035   <span class="keyword">private</span>:
+<a name="l00036"></a>00036 
+<a name="l00038"></a>00038     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classNXTDriver.html#abf3180ef1dd569f525228ddb2a791c11" title="Main function for device thread.">Main</a>();
+<a name="l00040"></a>00040     <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#a638c6fd442494ebca81583a62410cb93" title="Setup Function.">MainSetup</a>();
+<a name="l00042"></a>00042     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classNXTDriver.html#ab600f5dda01b40907eee44286df7a2b6" title="Quit function, should probably be implemented....">MainQuit</a>();
+<a name="l00043"></a>00043 <span class="comment">//why are these 4 virtual?????? must remove and test....</span>
+<a name="l00045"></a>00045 <span class="comment"></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classNXTDriver.html#aa67e8cc4d2f1f0f1eee1d348120e5f1f" title="Function to update the robots Sonar data.">UpdateSonars</a>();
+<a name="l00047"></a>00047     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classNXTDriver.html#a29e24a3b1e3ca30d11db42c85ede907e" title="Function to update the robots Light Sensor data.">UpdateLightSensors</a>();
+<a name="l00049"></a>00049     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classNXTDriver.html#af341d31d9f850043787a97d3c852a896" title="Function to update the robots Sound Sensor data.">UpdateSoundSensors</a>();
+<a name="l00051"></a>00051     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classNXTDriver.html#ac38bb5bf0521b7aec93077fb2eda29ce" title="Function to update the robots Bumper data.">UpdateBumpers</a>();
+<a name="l00052"></a>00052         
+<a name="l00053"></a><a class="code" href="classNXTDriver.html#acd9441dabc7343f378c04e26e93d6077">00053</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#acd9441dabc7343f378c04e26e93d6077" title="Address of the position device (wheels odometry).">position_addr</a>; 
+<a name="l00054"></a><a class="code" href="classNXTDriver.html#ac5790300252a8a1a2cbdfd7846288251">00054</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#ac5790300252a8a1a2cbdfd7846288251" title="Address of the sonar device.">sonar_addr</a>; 
+<a name="l00055"></a><a class="code" href="classNXTDriver.html#a2286ed3e7bbc46c8b05748785a30e2ef">00055</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#a2286ed3e7bbc46c8b05748785a30e2ef" title="Address of the light device.">light_addr</a>; 
+<a name="l00056"></a><a class="code" href="classNXTDriver.html#a85752cdabcd75bf510a7fd24fbd3a08e">00056</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#a85752cdabcd75bf510a7fd24fbd3a08e" title="Address of the sound device.">sound_addr</a>; 
+<a name="l00057"></a><a class="code" href="classNXTDriver.html#a1ac36f7f306163f90f84e89cc2a60afd">00057</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#a1ac36f7f306163f90f84e89cc2a60afd" title="Address of the bumper device.">bumper_addr</a>; 
+<a name="l00058"></a><a class="code" href="classNXTDriver.html#ae73dd5fd68ab18f6085e7a34d6f1cc77">00058</a>         player_devaddr_t <a class="code" href="classNXTDriver.html#ae73dd5fd68ab18f6085e7a34d6f1cc77" title="Address of the bumper device.">gripper_addr</a>; 
+<a name="l00059"></a>00059         
+<a name="l00060"></a>00060     <span class="keywordtype">int</span> foop; 
+<a name="l00061"></a><a class="code" href="classNXTDriver.html#a6694512d26c432849d2c07f4df693913">00061</a>     <span class="keywordtype">bool</span> <a class="code" href="classNXTDriver.html#a6694512d26c432849d2c07f4df693913" title="Differential Drive flag, other drives may be implemented at some point.">diffdrive</a>;             
+<a name="l00062"></a><a class="code" href="classNXTDriver.html#a8e4d2171b270cca628d1990c104e07dd">00062</a>     <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#a8e4d2171b270cca628d1990c104e07dd" title="Which port is the right wheel (for diff drive).">rightwheel</a>;             
+<a name="l00063"></a><a class="code" href="classNXTDriver.html#a29f6ade73b321a8297681ee55a4ad062">00063</a>     <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#a29f6ade73b321a8297681ee55a4ad062" title="Which port is the left wheel (for diff drive).">leftwheel</a>;              
+<a name="l00064"></a><a class="code" href="classNXTDriver.html#a8fd48fc0e5f1407e474ca28339d7aa32">00064</a>     <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#a8fd48fc0e5f1407e474ca28339d7aa32" title="Numper of Sonars.">sonarcount</a>;             
+<a name="l00065"></a><a class="code" href="classNXTDriver.html#a5a56f40b91dfce49ce228150313fde42">00065</a>     <span class="keywordtype">int</span> *<a class="code" href="classNXTDriver.html#a5a56f40b91dfce49ce228150313fde42" title="An array of sonar port numbers.">sonars</a>;                
+<a name="l00066"></a><a class="code" href="classNXTDriver.html#af925879f85d703c2b60f81528bb4917d">00066</a>     <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#af925879f85d703c2b60f81528bb4917d" title="Number of Light Sensors.">lightsensorcount</a>;       
+<a name="l00067"></a><a class="code" href="classNXTDriver.html#a97fce5bebe1b32fba6a765649d9d19cc">00067</a>     <span class="keywordtype">int</span> *<a class="code" href="classNXTDriver.html#a97fce5bebe1b32fba6a765649d9d19cc" title="An array of Light Sensor port numbers.">lightsensors</a>;          
+<a name="l00068"></a><a class="code" href="classNXTDriver.html#a2d120d9e99ac24c2c40c0ff899e72cd8">00068</a>     <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#a2d120d9e99ac24c2c40c0ff899e72cd8" title="Number of Sound Sensors.">soundsensorcount</a>;       
+<a name="l00069"></a><a class="code" href="classNXTDriver.html#a9769e8c92d2491a59c669456fc883bf9">00069</a>     <span class="keywordtype">int</span> *<a class="code" href="classNXTDriver.html#a9769e8c92d2491a59c669456fc883bf9" title="An array of Sound Sensor port numbers.">soundsensors</a>;          
+<a name="l00070"></a><a class="code" href="classNXTDriver.html#a2dcf2b25dfabe7a379604e2472aad291">00070</a>     <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#a2dcf2b25dfabe7a379604e2472aad291" title="Number of Bumpers.">bumpercount</a>;            
+<a name="l00071"></a><a class="code" href="classNXTDriver.html#a8069f14b1972dd74be1847f06d121241">00071</a>     <span class="keywordtype">int</span> *<a class="code" href="classNXTDriver.html#a8069f14b1972dd74be1847f06d121241" title="An array of Bumper Port numbers.">bumpers</a>;               
+<a name="l00072"></a><a class="code" href="classNXTDriver.html#ad749d96826786f1a0e07cd601466b455">00072</a>     <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#ad749d96826786f1a0e07cd601466b455" title="Port number for the gripper.">gripperport</a>;            
+<a name="l00073"></a><a class="code" href="classNXTDriver.html#a8c0ca1002d4cf301d8bba0231f55ca3c">00073</a>     <span class="keywordtype">int</span> <a class="code" href="classNXTDriver.html#a8c0ca1002d4cf301d8bba0231f55ca3c" title="the number of degrees to rotate the gripper back and forth for open and close.">gripperangle</a>;           
+<a name="l00074"></a><a class="code" href="classNXTDriver.html#a28fb241394b704132b5c89052435d8ec">00074</a>     <span class="keywordtype">char</span> *<a class="code" href="classNXTDriver.html#a28fb241394b704132b5c89052435d8ec" title="the BT address of the NXT we want to use.">btaddress</a>;            
+<a name="l00075"></a>00075 
+<a name="l00076"></a><a class="code" href="classNXTDriver.html#a6dad171ef1a5ed6c6d00941f7f9c316f">00076</a>     <a class="code" href="classConnection.html" title="Connection class is the parent of all connections.">Connection</a> *<a class="code" href="classNXTDriver.html#a6dad171ef1a5ed6c6d00941f7f9c316f" title="Connection object used to talk to the NXT it is cast to USB or BT Connection.">myConnection</a>; 
+<a name="l00077"></a>00077 };
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 Driver* NXTDriver_Init(ConfigFile *cf, <span class="keywordtype">int</span> section);
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081 <span class="keywordtype">void</span> NXTDriver_Register(DriverTable *table);
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 <span class="preprocessor">#endif </span><span class="comment">/* NXTDRIVER */</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Jun 1 17:35:15 2010 by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jun 3 12:57:23 2010 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
