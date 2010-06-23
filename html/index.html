@@ -18,8 +18,46 @@
   </div>
 </div>
 <div class="contents">
-<h1></h1></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jun 3 12:57:23 2010 by&nbsp;
+<h1></h1><p>This is the Player Stage Plugin Driver for the Lego NXT robot.</p>
+<p>Developed by Metrobotics.  <a href="http://bots.sci.brooklyn.cuny.edu/metrobotics/">http://bots.sci.brooklyn.cuny.edu/metrobotics/</a></p>
+<p>the NXT driver config file</p>
+<p>For diff drive (the only currently supported drive mode) <br/>
+ 1)add ""position2d:0"" to the provides section <br/>
+ 2)add "drive "differential"" <br/>
+ 3)add "rightwheel "portletter"" where portletter is A,B, or C <br/>
+ 4)add "leftwheel "portletter"" where portletter is A,B, or C</p>
+<p>For sonar sensors <br/>
+ 1)add ""sonar:0"" to the provides section <br/>
+ 2)add "sonarcount "numsonars"" where numsonars is the number of sonars <br/>
+ 3)add "sonarports ["4""2"]" if sonars are in ports 2 and 4 <br/>
+</p>
+<p>For light sensors <br/>
+ 1)add ""light:ranger:0"" to the provides section you need to increment 0 for multiple rangers(sound, light, etc..) <br/>
+ 2)add "lightsensorcount "numlights"" where numlights is the number of lights <br/>
+ 3)add "lightsensorports ["1""2"]" if sonars are in ports 1 and 2 <br/>
+</p>
+<p>For sound sensors <br/>
+ 1)add ""sound:ranger:0"" to the provides section you need to increment 0 for multiple rangers(sound, light, etc..) <br/>
+ 2)add "soundsensorcount "numsound"" where numsound is the number of sounds <br/>
+ 3)add "soundsensorports ["1""2""3""4"]" if sonars are in ports 1,2,3, and 4 <br/>
+</p>
+<p>For bumper sensors <br/>
+ 1)add ""bumper:0"" to the provides section you need to increment 0 for multiple rangers(sound, light, etc..) <br/>
+ 2)add "bumpercount "numbumper"" where numbumper is the number of bumpers <br/>
+ 3)add "bumperports ["4""2""3""1"]" if sonars are in ports 1,2,3, and 4 <br/>
+</p>
+<p>in case you didnt notice order of sensors dosnt matter player will recognise them in the order you list them here...</p>
+<p>For Gripper <br/>
+ 1)add "gripperport "portletter"" where portletter is A,B, or C <br/>
+ 2)add "gripperangle "integer"" where integer represents how many degrees the motor needs to turn to open or close the gripper <br/>
+ if open and close are reversed, use a negative angle or recunstruct gripper. (open and close can reverse based on how you build your gripper!)</p>
+<p>For Bluetooth <br/>
+ 1)add "btaddress "btaddress"" <br/>
+ for mitchxt it is "btaddress "00:16:53:02:D5:C8"" <br/>
+ without a btaddress feild the driver will default to usb <br/>
+ </p>
+</div>
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Jun 23 17:59:36 2010 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
